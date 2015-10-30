@@ -21,8 +21,9 @@ effect.setSize( window.innerWidth, window.innerHeight );
 //bg color
 renderer.setClearColor( 0x66aaff );
 
-scene.fog = new THREE.FogExp2( 0xaaddff, .05);
+scene.fog = new THREE.FogExp2( 0xaaddff, .02);
 
+var everything = new THREE.Object3D();
 
 // //skybox
 // var skyGeometry = new THREE.IcosahedronGeometry(10,4);
@@ -43,7 +44,7 @@ var plane = new THREE.Mesh( planeGeometry, planeMaterial );
 plane.rotation.x = 1.58;
 plane.position.y = -10;
 plane.scale.set(2,2,2);
-scene.add( plane );
+everything.add( plane );
 
 for (var i = 0; i < plane.geometry.vertices.length; i++){
   plane.geometry.vertices[i].z = 2*Math.sin(plane.geometry.vertices[i].y/3) + 2*Math.sin(plane.geometry.vertices[i].x/4) + 5*Math.cos(plane.geometry.vertices[i].y/7) + 3*Math.cos(plane.geometry.vertices[i].x/5);
@@ -120,7 +121,7 @@ var islandBit = object;
 island[0].add(islandBit);
 });
 
-scene.add( island[0] );
+everything.add( island[0] );
 
 //island 1:
 var manager10 = new THREE.LoadingManager();
@@ -171,32 +172,39 @@ var islandBit = object;
 island[1].add(islandBit);
 });
 
-scene.add( island[1] );
+everything.add( island[1] );
 
 //lights    
 var light = new THREE.PointLight( 0xffffff, 1, 40);
 light.position.set( 0,4,0);
 light.castShadow = true;
-scene.add( light );
+everything.add( light );
 
 var light2 = new THREE.PointLight( 0xffffff, 1, 100);
 light2.position.set( 30,10,20);
 light2.castShadow = true;
-scene.add( light2 );
+everything.add( light2 );
 
-var t = 0;
+var t = -1;
+var pos = new THREE.Vector2(0,0);
 
-// island[0].position.y = -10;
 island[1].position.z = -1;
+
+scene.add(everything);
 /*
 Request animation frame loop function
 */
 function animate() {
 
   t += .005
+  pos.set(camera.position.x, camera.position.z);
 
+  if (pos.distanceTo(island[0].position) < 3){
   island[1].position.x = 10 + (10 * Math.sin(t));
+  everything.position.x = -10 - (10 * Math.sin(t));
+  };
 
+  //if (camera.position.)
 
   //Update VR headset position and apply to camera.
   controls.update();
