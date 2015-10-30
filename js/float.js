@@ -19,19 +19,76 @@ var effect = new THREE.VREffect( renderer );
 effect.setSize( window.innerWidth, window.innerHeight );
 
 
-/************* TODO: Generate Your VR Scene Below *********************/
+//skybox
+var skyGeometry = new THREE.IcosahedronGeometry(10,4);
+var skyMaterial = new THREE.MeshBasicMaterial({
+  map: THREE.ImageUtils.loadTexture(
+      "media/officeRender.jpg"),
+  color:0xffffff
+  });
+var skybox = new THREE.Mesh( skyGeometry, skyMaterial );
+skybox.scale.set(100,100,100);
+skybox.material.side = THREE.BackSide;
+scene.add(skybox);
 
+//Island 1
+var island = [
+  new THREE.Object3D(), //0: big U island
+  new THREE.Object3D() //1: little U moving island
+  ];
 
-/*
-TODO: Create, position, and add 3d objects here
-*/
+var matArray = [
+  new THREE.MeshLambertMaterial({color:0xff8800}), //0: brown ground
+  new THREE.MeshLambertMaterial({color:0xaaaaaa}), //1: grey rocks
+  new THREE.MeshLambertMaterial({color:0x33ff00}) //2: green grass
+  ];
 
+var fileName = [
+  'media/i1ground.obj', 'media/i1rocks.obj', 'media/i1grass.obj',
+  'media/i2ground.obj', 'media/i2rocks.obj', 'media/i2grass.obj'
+  ];
 
+  // load the meshes
+for (var j = 0; j < 2; j++){
+  for (var i=0; i<3; i++){
+
+    var manager = new THREE.LoadingManager();
+    var loader = new THREE.OBJLoader(manager);
+
+    loader.load( fileName[i + 3*j], function ( object ) {
+    object.scale.set(1,1,1);
+    object.position.set(0,0,0);    
+    object.traverse(function (child) {
+            if (child instanceof THREE.Mesh) {
+                child.material = matArray[i];
+                child.frustumCulled = false;
+            }
+        });
+    var thing = object;
+    island[1].add(thing);
+
+    });
+  }
+}
+scene.add( island[0] );
+scene.add( island[1] );
+island[1].position.y = -3
+
+//lights    
+var light = new THREE.PointLight( 0xffffff, 1, 20);
+light.position.set( 0,5,0);
+light.castShadow = true;
+scene.add( light );
+
+var t = 0;
 /*
 Request animation frame loop function
 */
 function animate() {
-  // TODO: Apply any desired changes for the next frame here.
+
+  t += .001
+
+  island[1].position.z = Math.sin(t);
 
 
   //Update VR headset position and apply to camera.
