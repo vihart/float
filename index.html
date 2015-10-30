@@ -1,0 +1,65 @@
+<!--
+
+This is the standard ThreeJS-based boilerplate for webVR
+	currently being used by the eleVR team.
+
+It has oculus support for webVR browsers, support for the non-VR web,
+	and support for smartphone on google cardboard or similar VR device.
+
+Supported Navigation Controls:
+	WASD + E/Q navigation support for rotation.
+	Arrow key navigation support for moving the location of the camera.
+	Gamepad joystick navigation controls.
+	Orientation control with a VR headset OR mobile phone.
+
+Click to enter full-screen VR mode.
+
+This boilerplate is based on Mozilla's boilerplate: https://github.com/MozVR/vr-web-examples/tree/master/threejs-vr-boilerplate
+
+It has been developed with the help of a great many people including (but not limited to) Vi Hart, Andrew Lutomirski, Henry Segerman, and the Firefox webVR team.
+
+-->
+
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>webVR boilerplate</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				background-color: #000;
+				color: #fff;
+				margin: 0px;
+				padding: 0;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body></body>
+
+	<!--
+	three.js 3d library
+	-->
+	<script src="js/lib/three.min.js"></script>
+
+	<!--
+	PhoneVR acquires positional information from phone orientation. This is used by VRControls.js
+	VRControls.js acquires positional information from connected VR devices and applies the transformations to a three.js camera object.
+	 -->
+	<script src="js/vr/PhoneVR.js"></script>
+	<script src="js/vr/VRControls.js"></script>
+
+	<!--
+	VREffect.js handles stereo camera setup and rendering.
+	-->
+	<script src="js/vr/VREffect.js"></script>
+
+	<!--
+	This file is where the VR scene is generated. We include some Demo stuff in this file. 
+	To create your own you can use "blankWebVR.js"
+	-->
+	<script src="js/demoWebVR.js"></script>
+</html>
