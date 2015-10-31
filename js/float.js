@@ -26,12 +26,12 @@ scene.fog = new THREE.FogExp2( 0xaaddff, .02);
 var everything = new THREE.Object3D();
 
 //ground
-var planeGeometry = new THREE.PlaneGeometry( 100, 100, 100, 100 );
+var planeGeometry = new THREE.PlaneGeometry( 200, 100, 100, 100 );
 var planeMaterial = new THREE.MeshLambertMaterial( {color: 0x88ff66, side: THREE.DoubleSide, wireframe:false} );
 var plane = new THREE.Mesh( planeGeometry, planeMaterial );
 plane.rotation.x = 1.58;
-plane.position.y = -10;
-// plane.position.x = 50;
+plane.position.y = -20;
+plane.position.x = 30;
 plane.scale.set(2,2,2);
 everything.add( plane );
 
@@ -40,12 +40,12 @@ for (var i = 0; i < plane.geometry.vertices.length; i++){
 }
 
 //clouds
-var plane2Geometry = new THREE.PlaneGeometry( 100, 100, 100, 100 );
+var plane2Geometry = new THREE.PlaneGeometry( 200, 100, 100, 100 );
 var plane2Material = new THREE.MeshLambertMaterial( {color: 0xffffff, side: THREE.DoubleSide, wireframe:false} );
 var plane2 = new THREE.Mesh( plane2Geometry, plane2Material );
 plane2.rotation.x = 1.58;
-plane2.position.y = 30;
-// plane2.position.z = 50;
+plane2.position.y = 45;
+plane2.position.x = 30;
 plane2.scale.set(2,2,2);
 everything.add( plane2 );
 
@@ -301,8 +301,8 @@ var t = -1;
 var pos = new THREE.Vector2(0,0);
 
 island[1].position.z = -1;
-  island[1].position.x = 33 + (33 * Math.sin(t));
-  everything.position.x = -33 - (33 * Math.sin(t));
+  island[1].position.x = 35 + (35 * Math.sin(t));
+  everything.position.x = -35 - (35 * Math.sin(t));
 
 scene.add(everything);
 /*
@@ -312,10 +312,10 @@ function animate() {
 
   pos.set(camera.position.x, camera.position.z);
 
-  if (pos.distanceTo(island[0].position) < 3){
+  if (pos.distanceTo(island[0].position) < 4){
   t += .002
-  island[1].position.x = 33 + (33 * Math.sin(t));
-  everything.position.x = -33 - (33 * Math.sin(t));
+  island[1].position.x = 35 + (35 * Math.sin(t));
+  everything.position.x = -35 - (35 * Math.sin(t));
   };
 
   //Update VR headset position and apply to camera.
