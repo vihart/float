@@ -189,6 +189,8 @@ var t = -1;
 var pos = new THREE.Vector2(0,0);
 
 island[1].position.z = -1;
+  island[1].position.x = 30 + (30 * Math.sin(t));
+  everything.position.x = -30 - (30 * Math.sin(t));
 
 scene.add(everything);
 /*
@@ -196,12 +198,12 @@ Request animation frame loop function
 */
 function animate() {
 
-  t += .005
   pos.set(camera.position.x, camera.position.z);
 
   if (pos.distanceTo(island[0].position) < 3){
-  island[1].position.x = 10 + (10 * Math.sin(t));
-  everything.position.x = -10 - (10 * Math.sin(t));
+  t += .002
+  island[1].position.x = 30 + (30 * Math.sin(t));
+  everything.position.x = -30 - (30 * Math.sin(t));
   };
 
   //if (camera.position.)
