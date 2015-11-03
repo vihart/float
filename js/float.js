@@ -127,7 +127,7 @@ i5grass.add(object);
 island5.add(i5grass);
 });
 island5.position.x = -30;
-island5.position.y = 5;
+island5.position.y = 15;
 everything.add(island5);
 
 //island6:
@@ -180,7 +180,7 @@ island6.add(i6grass);
 });
 island6.position.x = -20;
 island6.position.z = -18;
-island6.position.y = 10;
+island6.position.y = 20;
 everything.add(island6);
 
 
@@ -545,7 +545,7 @@ function animate() {
     bird[i].geometry.verticesNeedUpdate = true;
     bird[i].position.x = 57*birdseed[i] + 20 * Math.sin((t+200*birdseed[i])/57) + 5*Math.sin(t*birdseed[i]/51) + 8*Math.sin(t*birdseed[i]/67) + 10*birdseed[i]*Math.sin(t*birdseed[i]/79);
     bird[i].position.z = 20 * Math.cos((t+200*birdseed[i])/57) + 7*Math.sin(t*birdseed[i]/51) + 6*Math.sin(t*birdseed[i]/67) + 11*birdseed[i]*Math.cos(t*birdseed[i]/73);
-    bird[i].position.y = 15 + 5*Math.sin((t+333*birdseed[i])/(39 - 20000*(birdseed[i]/2432)));
+    bird[i].position.y = 25 + 5*Math.sin((t+333*birdseed[i])/(39 - 20000*(birdseed[i]/2432)));
   };
 
   //rolling clouds
