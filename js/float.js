@@ -53,7 +53,6 @@ for (var i = 0; i < plane2.geometry.vertices.length; i++){
   plane2.geometry.vertices[i].z = Math.sin(plane.geometry.vertices[i].y/3) + 1.2*Math.sin(plane.geometry.vertices[i].x/2) + 1.1*Math.cos(plane.geometry.vertices[i].y/3) + 1.5*Math.cos(plane.geometry.vertices[i].x/3);
 };
 
-//Island 1
 var island = [
   new THREE.Object3D(), //0: big U island
   new THREE.Object3D(), //1: little U moving island
@@ -61,10 +60,11 @@ var island = [
   new THREE.Object3D() //3: L subisland
   ];
 
+
 var matArray = [
-  new THREE.MeshLambertMaterial({color:0xff8800}), //0: brown ground
-  new THREE.MeshLambertMaterial({color:0xaaaaaa}), //1: grey rocks
-  new THREE.MeshLambertMaterial({color:0x33ff00}) //2: green grass
+  new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"}), //0: brown ground
+  new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"}), //1: grey rocks
+  new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"}) //2: green grass
   ];
 
 var fileName = [
@@ -75,6 +75,115 @@ var fileName = [
   ];
 
 //apparently loaders work nonlinearly and I really can't loop this or something??
+
+
+
+//island5:
+var island5 = new THREE.Object3D();
+var i5ground = new THREE.Object3D();
+var i5rocks = new THREE.Object3D();
+var i5grass = new THREE.Object3D();
+
+var manager50 = new THREE.LoadingManager();
+var loader50 = new THREE.OBJLoader(manager50);
+loader50.load( fileName[3], function ( object ) {
+object.scale.set(1,1,1);
+object.position.set(0,0,0);    
+object.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+            child.material = new THREE.MeshLambertMaterial({color:0x666666});
+            child.frustumCulled = false;
+        }
+    });
+i5ground.add(object);
+island5.add(i5ground);
+});
+var manager51 = new THREE.LoadingManager();
+var loader51 = new THREE.OBJLoader(manager51);
+loader51.load( fileName[4], function ( object ) {
+object.scale.set(1,1,1);
+object.position.set(0,0,0);    
+object.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+            child.material = new THREE.MeshLambertMaterial({color:0x666666});
+            child.frustumCulled = false;
+        }
+    });
+i5rocks.add(object);
+island5.add(i5rocks);
+});
+var manager52 = new THREE.LoadingManager();
+var loader52 = new THREE.OBJLoader(manager52);
+loader52.load( fileName[5], function ( object ) {
+object.scale.set(1,1,1);
+object.position.set(0,0,0);    
+object.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+            child.material = new THREE.MeshLambertMaterial({color:0x666666});
+            child.frustumCulled = false;
+        }
+    });
+i5grass.add(object);
+island5.add(i5grass);
+});
+island5.position.x = -30;
+island5.position.y = 5;
+everything.add(island5);
+
+//island6:
+var island6 = new THREE.Object3D();
+var i6ground = new THREE.Object3D();
+var i6rocks = new THREE.Object3D();
+var i6grass = new THREE.Object3D();
+
+var manager60 = new THREE.LoadingManager();
+var loader60 = new THREE.OBJLoader(manager60);
+loader60.load( fileName[3], function ( object ) {
+object.scale.set(1,1,1);
+object.position.set(0,0,0);    
+object.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+            child.material = new THREE.MeshLambertMaterial({color:0x666666});
+            child.frustumCulled = false;
+        }
+    });
+i6ground.add(object);
+island6.add(i6ground);
+});
+var manager61 = new THREE.LoadingManager();
+var loader61 = new THREE.OBJLoader(manager61);
+loader61.load( fileName[4], function ( object ) {
+object.scale.set(1,1,1);
+object.position.set(0,0,0);    
+object.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+            child.material = new THREE.MeshLambertMaterial({color:0x666666});
+            child.frustumCulled = false;
+        }
+    });
+i6rocks.add(object);
+island6.add(i6rocks);
+});
+var manager62 = new THREE.LoadingManager();
+var loader62 = new THREE.OBJLoader(manager62);
+loader62.load( fileName[5], function ( object ) {
+object.scale.set(1,1,1);
+object.position.set(0,0,0);    
+object.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+            child.material = new THREE.MeshLambertMaterial({color:0x666666});
+            child.frustumCulled = false;
+        }
+    });
+i6grass.add(object);
+island6.add(i6grass);
+});
+island6.position.x = -20;
+island6.position.z = -18;
+island6.position.y = 10;
+everything.add(island6);
+
+
 
 //island 0:
 var manager00 = new THREE.LoadingManager();
@@ -89,8 +198,8 @@ object.traverse(function (child) {
             child.frustumCulled = false;
         }
     });
-var islandBit = object;
-island[0].add(islandBit);
+var i0ground = object;
+island[0].add(i0ground);
 });
 
 var manager01 = new THREE.LoadingManager();
@@ -101,12 +210,12 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = matArray[1];
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
-var islandBit = object;
-island[0].add(islandBit);
+var i0rocks = object;
+island[0].add(i0rocks);
 });
 
 var manager02 = new THREE.LoadingManager();
@@ -117,12 +226,12 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = matArray[2];
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
-var islandBit = object;
-island[0].add(islandBit);
+var i0grass = object;
+island[0].add(i0grass);
 });
 
 everything.add( island[0] );
@@ -136,7 +245,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = matArray[0];
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -152,7 +261,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = matArray[1];
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -168,7 +277,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = matArray[2];
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -187,7 +296,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = matArray[0];
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -203,7 +312,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = matArray[1];
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -219,7 +328,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = matArray[2];
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -238,7 +347,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = matArray[0];
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -254,7 +363,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = matArray[1];
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -270,7 +379,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = matArray[2];
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -333,6 +442,21 @@ for (var i = 0; i < birdNumber; i++){
 
 scene.add(everything);
 
+var i0t = 0;
+var i1t = 0;
+var i2t = 0;
+var i3t = 0;
+var i4t = 0;
+var i5t = 0;
+var i6t = 0;
+
+var relative1 = 0;
+var relative2 = 0;
+var relative3 = 0;
+
+var relative5 = 0;
+var relative6 = 0;
+
 /*
 Request animation frame loop function
 */
@@ -341,6 +465,70 @@ function animate() {
   t += 1;
 
   pos.set(camera.position.x, camera.position.z);
+
+  relative5 = new THREE.Vector2(island5.position.x + everything.position.x, island5.position.z + everything.position.z);
+  if (pos.distanceTo(relative5) < 10){
+    i5t += .001;
+    if (i5t > .2){
+      island5.children[2].children[0].children[0].material.color.setRGB(0.4-i5t,i5t,0.4-i5t); //this will break everything if objs aren't loaded yet
+      if (i5t < .4){
+        island5.children[0].children[0].children[0].material.color.setRGB(i5t,0.3-i5t/2,0.4-i5t);
+      };
+    };
+  };
+
+  relative6 = new THREE.Vector2(island6.position.x + everything.position.x, island6.position.z + everything.position.z);
+  if (pos.distanceTo(relative6) < 10){
+    i6t += .001;
+    if (i6t > .2){
+      island6.children[2].children[0].children[0].material.color.setRGB(0.4-i6t,i6t,0.4-i6t); //this will break everything if objs aren't loaded yet
+      if (i6t < .4){
+        island6.children[0].children[0].children[0].material.color.setRGB(i6t,0.3-i6t/2,0.4-i6t);
+      };
+    };
+  };
+
+  if (pos.distanceTo(island[0].position) < 15){
+    i0t += .001;
+    if (i0t > .2){
+      island[0].children[2].children[0].material.color.setRGB(0.4-i0t,i0t,0.4-i0t); //this will break everything if objs aren't loaded yet
+      if (i0t < .4){
+      island[0].children[0].children[0].material.color.setRGB(i0t,0.3-i0t/2,0.4-i0t);
+      }
+    };
+  };
+
+  relative1 = new THREE.Vector2(0 - everything.position.x - island[1].position, 0 - everything.position.z - island[1].position);
+  if (pos.distanceTo(relative1) < 10){
+    i1t += .001;
+    if (i1t > .2){
+      island[1].children[2].children[0].material.color.setRGB(0.4-i1t,i1t,0.4-i1t); //this will break everything if objs aren't loaded yet
+      if (i1t < .4){
+      island[1].children[0].children[0].material.color.setRGB(i1t,0.3-i1t/2,0.4-i1t);
+      };
+    };
+  };
+  relative2 = new THREE.Vector2(65 + everything.position.x, - 15 + everything.position.z);
+  if (pos.distanceTo(relative2) < 10){
+    i2t += .001;
+    if (i2t > .2){
+      island[2].children[2].children[0].material.color.setRGB(0.4-i2t,i2t,0.4-i2t); //this will break everything if objs aren't loaded yet
+      if (i2t < .4){
+      island[2].children[0].children[0].material.color.setRGB(i2t,0.3-i2t/2,0.4-i2t);
+      };
+    };
+  };
+
+  relative3 = new THREE.Vector2(65 + everything.position.x, 10 + everything.position.z);
+  if (pos.distanceTo(relative3) < 10){
+    i3t += .001;
+    if (i3t > .2){
+      island[3].children[2].children[0].material.color.setRGB(0.4-i3t,i3t,0.4-i3t); //this will break everything if objs aren't loaded yet
+      if (i3t < .4){
+      island[3].children[0].children[0].material.color.setRGB(i3t,0.3-i3t/2,0.4-i3t);
+      };
+    };
+  };
 
   if (pos.distanceTo(island[0].position) < 4){
   p1 += .002
