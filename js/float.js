@@ -37,7 +37,7 @@ everything.add( plane );
 
 for (var i = 0; i < plane.geometry.vertices.length; i++){
   plane.geometry.vertices[i].z = 2*Math.sin(plane.geometry.vertices[i].y/3) + 2*Math.sin(plane.geometry.vertices[i].x/4) + 5*Math.cos(plane.geometry.vertices[i].y/7) + 3*Math.cos(plane.geometry.vertices[i].x/5);
-}
+};
 
 //clouds
 var plane2Geometry = new THREE.PlaneGeometry( 200, 100, 100, 100 );
@@ -51,7 +51,7 @@ everything.add( plane2 );
 
 for (var i = 0; i < plane2.geometry.vertices.length; i++){
   plane2.geometry.vertices[i].z = Math.sin(plane.geometry.vertices[i].y/3) + 1.2*Math.sin(plane.geometry.vertices[i].x/2) + 1.1*Math.cos(plane.geometry.vertices[i].y/3) + 1.5*Math.cos(plane.geometry.vertices[i].x/3);
-}
+};
 
 //Island 1
 var island = [
@@ -297,26 +297,74 @@ light2.position.set( 30,10,20);
 light2.castShadow = true;
 everything.add( light2 );
 
-var t = -1;
+var p1 = -1;
+var t = 0;
 var pos = new THREE.Vector2(0,0);
 
 island[1].position.z = -1;
-  island[1].position.x = 35 + (35 * Math.sin(t));
-  everything.position.x = -35 - (35 * Math.sin(t));
+  island[1].position.x = 35 + (35 * Math.sin(p1));
+  everything.position.x = -35 - (35 * Math.sin(p1));
+
+//bird
+var bird = [];
+var birdseed = [];
+var birdNumber = 20;
+
+for (var i = 0; i < birdNumber; i++){
+  bird[i] = new THREE.Mesh(
+      new THREE.OctahedronGeometry(1),
+      new THREE.MeshLambertMaterial()
+      );
+
+  bird[i].geometry.vertices[0].set(1,0,0);
+  bird[i].geometry.vertices[1].set(-1,0,0);
+  bird[i].geometry.vertices[2].set(0,0.02,1);
+  bird[i].geometry.vertices[3].set(0,-0.02,-1);
+  bird[i].geometry.vertices[4].set(0,-0.02,1);
+  bird[i].geometry.vertices[5].set(0,0.02,-1);
+
+  birdseed[i] = Math.random();
+  var birdscale = 2*Math.random()*Math.random() + .5;
+  bird[i].scale.set(birdscale,birdscale,birdscale);
+  bird[i].material.color.setRGB(Math.random(), Math.random(), Math.random());
+
+  everything.add(bird[i]);
+};
 
 scene.add(everything);
+
 /*
 Request animation frame loop function
 */
 function animate() {
 
+  t += 1;
+
   pos.set(camera.position.x, camera.position.z);
 
   if (pos.distanceTo(island[0].position) < 4){
-  t += .002
-  island[1].position.x = 35 + (35 * Math.sin(t));
-  everything.position.x = -35 - (35 * Math.sin(t));
+  p1 += .002
+  var move = 35 + (35 * Math.sin(p1));
+  island[1].position.x = move;
+  everything.position.x = -move;
   };
+
+  //bird flapping
+  for (var i = 0; i < birdNumber; i++){
+    var flappy = Math.sin(t/(5-(2*birdseed[i])));
+    bird[i].geometry.vertices[0].set(1,flappy,0);
+    bird[i].geometry.vertices[1].set(-1,flappy,0);
+    bird[i].geometry.verticesNeedUpdate = true;
+    bird[i].position.x = 57*birdseed[i] + 20 * Math.sin((t+200*birdseed[i])/57) + 5*Math.sin(t*birdseed[i]/51) + 8*Math.sin(t*birdseed[i]/67) + 10*birdseed[i]*Math.sin(t*birdseed[i]/79);
+    bird[i].position.z = 20 * Math.cos((t+200*birdseed[i])/57) + 7*Math.sin(t*birdseed[i]/51) + 6*Math.sin(t*birdseed[i]/67) + 11*birdseed[i]*Math.cos(t*birdseed[i]/73);
+    bird[i].position.y = 15 + 5*Math.sin((t+333*birdseed[i])/(39 - 20000*(birdseed[i]/2432)));
+  };
+
+  //rolling clouds
+  for (var i = 0; i < plane2.geometry.vertices.length; i++){
+  plane2.geometry.vertices[i].z = Math.sin((plane.geometry.vertices[i].y + t/89)/3) + 2*Math.sin((plane.geometry.vertices[i].y + t/99)/17) + 1.2*Math.sin((plane.geometry.vertices[i].x + t/123)/2) + 1.1*Math.cos((plane.geometry.vertices[i].y + t/197)/3.6) + 1.5*Math.cos((plane.geometry.vertices[i].x + t/111)/3);
+  };
+  plane2.geometry.verticesNeedUpdate=true;
 
   //Update VR headset position and apply to camera.
   controls.update();
@@ -328,9 +376,6 @@ function animate() {
 
 animate();	// Kick off animation loop
 
-
-
-/***************** TODO: Generate Your VR Scene Above *****************/
 
 
 
