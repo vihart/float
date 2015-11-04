@@ -53,19 +53,19 @@ for (var i = 0; i < plane2.geometry.vertices.length; i++){
   plane2.geometry.vertices[i].z = Math.sin(plane.geometry.vertices[i].y/3) + 1.2*Math.sin(plane.geometry.vertices[i].x/2) + 1.1*Math.cos(plane.geometry.vertices[i].y/3) + 1.5*Math.cos(plane.geometry.vertices[i].x/3);
 };
 
-var island = [
-  new THREE.Object3D(), //0: big U island
-  new THREE.Object3D(), //1: little U moving island
-  new THREE.Object3D(), //2: L island
-  new THREE.Object3D() //3: L subisland
-  ];
+// var island = [
+//   new THREE.Object3D(), //0: big U island
+//   new THREE.Object3D(), //1: little U moving island
+//   new THREE.Object3D(), //2: L island
+//   new THREE.Object3D() //3: L subisland
+//   ];
 
 
-var matArray = [
-  new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"}), //0: brown ground
-  new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"}), //1: grey rocks
-  new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"}) //2: green grass
-  ];
+// var matArray = [
+//   new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"}), //0: brown ground
+//   new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"}), //1: grey rocks
+//   new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"}) //2: green grass
+//   ];
 
 var fileName = [
   'media/i1ground.obj', 'media/i1rocks.obj', 'media/i1grass.obj',
@@ -91,7 +91,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = new THREE.MeshLambertMaterial({color:0x666666});
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -105,7 +105,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = new THREE.MeshLambertMaterial({color:0x666666});
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -119,7 +119,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = new THREE.MeshLambertMaterial({color:0x666666});
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -143,7 +143,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = new THREE.MeshLambertMaterial({color:0x666666});
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -157,7 +157,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = new THREE.MeshLambertMaterial({color:0x666666});
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -171,7 +171,7 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = new THREE.MeshLambertMaterial({color:0x666666});
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
@@ -186,6 +186,11 @@ everything.add(island6);
 
 
 //island 0:
+var island0 = new THREE.Object3D();
+var i0ground = new THREE.Object3D();
+var i0rocks = new THREE.Object3D();
+var i0grass = new THREE.Object3D();
+
 var manager00 = new THREE.LoadingManager();
 var loader00 = new THREE.OBJLoader(manager00);
 
@@ -194,12 +199,12 @@ object.scale.set(1,1,1);
 object.position.set(0,0,0);    
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
-            child.material = matArray[0];
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
             child.frustumCulled = false;
         }
     });
-var i0ground = object;
-island[0].add(i0ground);
+i0ground.add(object);
+island0.add(i0ground);
 });
 
 var manager01 = new THREE.LoadingManager();
@@ -214,8 +219,9 @@ object.traverse(function (child) {
             child.frustumCulled = false;
         }
     });
-var i0rocks = object;
-island[0].add(i0rocks);
+
+i0rocks.add(object);
+island0.add(i0rocks);
 });
 
 var manager02 = new THREE.LoadingManager();
@@ -230,13 +236,19 @@ object.traverse(function (child) {
             child.frustumCulled = false;
         }
     });
-var i0grass = object;
-island[0].add(i0grass);
+
+i0grass.add(object);
+island0.add(i0grass);
 });
 
-everything.add( island[0] );
+everything.add( island0 );
 
 //island 1:
+var island1 = new THREE.Object3D();
+var i1ground = new THREE.Object3D();
+var i1rocks = new THREE.Object3D();
+var i1grass = new THREE.Object3D();
+
 var manager10 = new THREE.LoadingManager();
 var loader10 = new THREE.OBJLoader(manager10);
 
@@ -249,8 +261,8 @@ object.traverse(function (child) {
             child.frustumCulled = false;
         }
     });
-var islandBit = object;
-island[1].add(islandBit);
+i1ground.add(object);
+island1.add(i1ground);
 });
 
 var manager11 = new THREE.LoadingManager();
@@ -265,8 +277,9 @@ object.traverse(function (child) {
             child.frustumCulled = false;
         }
     });
-var islandBit = object;
-island[1].add(islandBit);
+
+i1rocks.add(object);
+island1.add(i1rocks);
 });
 
 var manager12 = new THREE.LoadingManager();
@@ -281,13 +294,19 @@ object.traverse(function (child) {
             child.frustumCulled = false;
         }
     });
-var islandBit = object;
-island[1].add(islandBit);
+
+i1grass.add(object);
+island1.add(i1grass);
 });
 
-everything.add( island[1] );
+everything.add( island1 );
 
 //island 2:
+var island2 = new THREE.Object3D();
+var i2ground = new THREE.Object3D();
+var i2rocks = new THREE.Object3D();
+var i2grass = new THREE.Object3D();
+
 var manager20 = new THREE.LoadingManager();
 var loader20 = new THREE.OBJLoader(manager20);
 
@@ -300,8 +319,9 @@ object.traverse(function (child) {
             child.frustumCulled = false;
         }
     });
-var islandBit = object;
-island[2].add(islandBit);
+
+i2ground.add(object);
+island2.add(i2ground);
 });
 
 var manager21 = new THREE.LoadingManager();
@@ -316,8 +336,9 @@ object.traverse(function (child) {
             child.frustumCulled = false;
         }
     });
-var islandBit = object;
-island[2].add(islandBit);
+
+i2rocks.add(object);
+island2.add(i2rocks);
 });
 
 var manager22 = new THREE.LoadingManager();
@@ -332,13 +353,18 @@ object.traverse(function (child) {
             child.frustumCulled = false;
         }
     });
-var islandBit = object;
-island[2].add(islandBit);
+i2grass.add(object);
+island2.add(i2grass);
 });
 
-everything.add( island[2] );
+everything.add( island2 );
 
 //island 3:
+var island3 = new THREE.Object3D();
+var i3ground = new THREE.Object3D();
+var i3rocks = new THREE.Object3D();
+var i3grass = new THREE.Object3D();
+
 var manager30 = new THREE.LoadingManager();
 var loader30 = new THREE.OBJLoader(manager30);
 
@@ -351,8 +377,9 @@ object.traverse(function (child) {
             child.frustumCulled = false;
         }
     });
-var islandBit = object;
-island[3].add(islandBit);
+
+i3ground.add(object);
+island3.add(i3ground);
 });
 
 var manager31 = new THREE.LoadingManager();
@@ -367,8 +394,9 @@ object.traverse(function (child) {
             child.frustumCulled = false;
         }
     });
-var islandBit = object;
-island[3].add(islandBit);
+
+i3rocks.add(object);
+island3.add(i3rocks);
 });
 
 var manager32 = new THREE.LoadingManager();
@@ -383,17 +411,17 @@ object.traverse(function (child) {
             child.frustumCulled = false;
         }
     });
-var islandBit = object;
-island[3].add(islandBit);
+i3grass.add(object);
+island3.add(i3grass);
 });
 
-everything.add( island[3] );
+everything.add( island3 );
 
-island[2].position.x = -25;
-island[3].position.x = -25;
-island[3].position.z = 14;
-island[2].position.y = -8.5;
-island[3].position.y = -8.5;
+island2.position.x = -25;
+island3.position.x = -25;
+island3.position.z = 14;
+island2.position.y = -8.5;
+island3.position.y = -8.5;
 
 //lights    
 var light = new THREE.PointLight( 0xffffff, 1, 40);
@@ -410,8 +438,8 @@ var p1 = -1;
 var t = 0;
 var pos = new THREE.Vector2(0,0);
 
-island[1].position.z = -1;
-  island[1].position.x = 35 + (35 * Math.sin(p1));
+island1.position.z = -1;
+  island1.position.x = 35 + (35 * Math.sin(p1));
   everything.position.x = -35 - (35 * Math.sin(p1));
 
 //bird
@@ -470,9 +498,9 @@ function animate() {
   if (pos.distanceTo(relative5) < 10){
     i5t += .001;
     if (i5t > .2){
-      island5.children[2].children[0].children[0].material.color.setRGB(0.4-i5t,i5t,0.4-i5t); //this will break everything if objs aren't loaded yet
+      i5grass.children[0].children[0].material.color.setRGB(0.4-i5t,i5t,0.4-i5t); //this will break everything if objs aren't loaded yet
       if (i5t < .4){
-        island5.children[0].children[0].children[0].material.color.setRGB(i5t,0.3-i5t/2,0.4-i5t);
+        i5ground.children[0].children[0].material.color.setRGB(i5t,0.3-i5t/2,0.4-i5t);
       };
     };
   };
@@ -481,30 +509,30 @@ function animate() {
   if (pos.distanceTo(relative6) < 10){
     i6t += .001;
     if (i6t > .2){
-      island6.children[2].children[0].children[0].material.color.setRGB(0.4-i6t,i6t,0.4-i6t); //this will break everything if objs aren't loaded yet
+      i6grass.children[0].children[0].material.color.setRGB(0.4-i6t,i6t,0.4-i6t); //this will break everything if objs aren't loaded yet
       if (i6t < .4){
-        island6.children[0].children[0].children[0].material.color.setRGB(i6t,0.3-i6t/2,0.4-i6t);
+        i6ground.children[0].children[0].material.color.setRGB(i6t,0.3-i6t/2,0.4-i6t);
       };
     };
   };
 
-  if (pos.distanceTo(island[0].position) < 15){
+  if (pos.distanceTo(island0.position) < 15){
     i0t += .001;
     if (i0t > .2){
-      island[0].children[2].children[0].material.color.setRGB(0.4-i0t,i0t,0.4-i0t); //this will break everything if objs aren't loaded yet
+      i0grass.children[0].children[0].material.color.setRGB(0.4-i0t,i0t,0.4-i0t); //this will break everything if objs aren't loaded yet
       if (i0t < .4){
-      island[0].children[0].children[0].material.color.setRGB(i0t,0.3-i0t/2,0.4-i0t);
+        i0ground.children[0].children[0].material.color.setRGB(i0t,0.3-i0t/2,0.4-i0t);
       }
     };
   };
 
-  relative1 = new THREE.Vector2(0 - everything.position.x - island[1].position, 0 - everything.position.z - island[1].position);
+  relative1 = new THREE.Vector2(0 - everything.position.x - island1.position, 0 - everything.position.z - island1.position);
   if (pos.distanceTo(relative1) < 10){
     i1t += .001;
     if (i1t > .2){
-      island[1].children[2].children[0].material.color.setRGB(0.4-i1t,i1t,0.4-i1t); //this will break everything if objs aren't loaded yet
+      i1grass.children[0].children[0].material.color.setRGB(0.4-i1t,i1t,0.4-i1t); //this will break everything if objs aren't loaded yet
       if (i1t < .4){
-      island[1].children[0].children[0].material.color.setRGB(i1t,0.3-i1t/2,0.4-i1t);
+        i1ground.children[0].children[0].material.color.setRGB(i1t,0.3-i1t/2,0.4-i1t);
       };
     };
   };
@@ -512,9 +540,9 @@ function animate() {
   if (pos.distanceTo(relative2) < 10){
     i2t += .001;
     if (i2t > .2){
-      island[2].children[2].children[0].material.color.setRGB(0.4-i2t,i2t,0.4-i2t); //this will break everything if objs aren't loaded yet
+      i2grass.children[0].children[0].material.color.setRGB(0.4-i2t,i2t,0.4-i2t); //this will break everything if objs aren't loaded yet
       if (i2t < .4){
-      island[2].children[0].children[0].material.color.setRGB(i2t,0.3-i2t/2,0.4-i2t);
+        i2ground.children[0].children[0].material.color.setRGB(i2t,0.3-i2t/2,0.4-i2t);
       };
     };
   };
@@ -523,17 +551,17 @@ function animate() {
   if (pos.distanceTo(relative3) < 10){
     i3t += .001;
     if (i3t > .2){
-      island[3].children[2].children[0].material.color.setRGB(0.4-i3t,i3t,0.4-i3t); //this will break everything if objs aren't loaded yet
+      i3grass.children[0].children[0].material.color.setRGB(0.4-i3t,i3t,0.4-i3t); //this will break everything if objs aren't loaded yet
       if (i3t < .4){
-      island[3].children[0].children[0].material.color.setRGB(i3t,0.3-i3t/2,0.4-i3t);
+        i3ground.children[0].children[0].material.color.setRGB(i3t,0.3-i3t/2,0.4-i3t);
       };
     };
   };
 
-  if (pos.distanceTo(island[0].position) < 4){
+  if (pos.distanceTo(island0.position) < 4){
   p1 += .002
   var move = 35 + (35 * Math.sin(p1));
-  island[1].position.x = move;
+  island1.position.x = move;
   everything.position.x = -move;
   };
 
