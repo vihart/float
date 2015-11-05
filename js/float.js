@@ -26,7 +26,7 @@ scene.fog = new THREE.FogExp2( 0xaaddff, .02);
 var everything = new THREE.Object3D();
 
 //ground
-var planeGeometry = new THREE.PlaneGeometry( 200, 100, 100, 100 );
+var planeGeometry = new THREE.PlaneGeometry( 200, 170, 100, 100 );
 var planeMaterial = new THREE.MeshLambertMaterial( {color: 0x88ff66, side: THREE.DoubleSide, wireframe:false} );
 var plane = new THREE.Mesh( planeGeometry, planeMaterial );
 plane.rotation.x = 1.58;
@@ -40,7 +40,7 @@ for (var i = 0; i < plane.geometry.vertices.length; i++){
 };
 
 //clouds
-var plane2Geometry = new THREE.PlaneGeometry( 200, 100, 100, 100 );
+var plane2Geometry = new THREE.PlaneGeometry( 200, 170, 100, 100 );
 var plane2Material = new THREE.MeshLambertMaterial( {color: 0xffffff, side: THREE.DoubleSide, wireframe:false} );
 var plane2 = new THREE.Mesh( plane2Geometry, plane2Material );
 plane2.rotation.x = 1.58;
@@ -76,7 +76,56 @@ var fileName = [
 
 //apparently loaders work nonlinearly and I really can't loop this or something??
 
+//island4:
+var island4 = new THREE.Object3D();
+var i4ground = new THREE.Object3D();
+var i4rocks = new THREE.Object3D();
+var i4grass = new THREE.Object3D();
 
+var manager40 = new THREE.LoadingManager();
+var loader40 = new THREE.OBJLoader(manager40);
+loader40.load( fileName[3], function ( object ) {
+object.scale.set(1,1,1);
+object.position.set(0,0,0);    
+object.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
+            child.frustumCulled = false;
+        }
+    });
+i4ground.add(object);
+island4.add(i4ground);
+});
+var manager41 = new THREE.LoadingManager();
+var loader41 = new THREE.OBJLoader(manager41);
+loader41.load( fileName[4], function ( object ) {
+object.scale.set(1,1,1);
+object.position.set(0,0,0);    
+object.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
+            child.frustumCulled = false;
+        }
+    });
+i4rocks.add(object);
+island4.add(i4rocks);
+});
+var manager42 = new THREE.LoadingManager();
+var loader42 = new THREE.OBJLoader(manager42);
+loader42.load( fileName[5], function ( object ) {
+object.scale.set(1,1,1);
+object.position.set(0,0,0);    
+object.traverse(function (child) {
+        if (child instanceof THREE.Mesh) {
+            child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
+            child.frustumCulled = false;
+        }
+    });
+i4grass.add(object);
+island4.add(i4grass);
+});
+island4.position.x = -27;
+everything.add(island4);
 
 //island5:
 var island5 = new THREE.Object3D();
@@ -419,7 +468,7 @@ everything.add( island3 );
 
 island2.position.x = -25;
 island3.position.x = -25;
-island3.position.z = 14;
+island3.position.z = 17;
 island2.position.y = -8.5;
 island3.position.y = -8.5;
 
@@ -435,12 +484,21 @@ light2.castShadow = true;
 everything.add( light2 );
 
 var p1 = -1;
+var p2 = 0;
+var p4 = 0;
+var move = 35 + (35 * Math.sin(p1));
+var move2 = -8 + (15 * Math.sin(p2));
+var move4 = -(40 * Math.cos(p4)) + 40 + 15;
+
 var t = 0;
 var pos = new THREE.Vector2(0,0);
 
 island1.position.z = -1;
-  island1.position.x = 35 + (35 * Math.sin(p1));
-  everything.position.x = -35 - (35 * Math.sin(p1));
+island1.position.x = move;
+island3.position.x = move2;
+island4.position.z = move4;
+everything.position.x = -(move + move2);
+everything.position.z = -move4 + 15;
 
 //bird
 var bird = [];
@@ -481,7 +539,7 @@ var i6t = 0;
 var relative1 = 0;
 var relative2 = 0;
 var relative3 = 0;
-
+var relative4 = 0;
 var relative5 = 0;
 var relative6 = 0;
 
@@ -493,6 +551,17 @@ function animate() {
   t += 1;
 
   pos.set(camera.position.x, camera.position.z);
+
+  relative4 = new THREE.Vector2(island4.position.x + everything.position.x, island4.position.z + everything.position.z);
+  if (pos.distanceTo(relative4) < 10){
+    i4t += .001;
+    if (i4t > .2){
+      i4grass.children[0].children[0].material.color.setRGB(0.4-i4t,i4t,0.4-i4t); //this will break everything if objs aren't loaded yet
+      if (i4t < .4){
+        i4ground.children[0].children[0].material.color.setRGB(i4t,0.3-i4t/2,0.4-i4t);
+      };
+    };
+  };
 
   relative5 = new THREE.Vector2(island5.position.x + everything.position.x, island5.position.z + everything.position.z);
   if (pos.distanceTo(relative5) < 10){
@@ -526,7 +595,7 @@ function animate() {
     };
   };
 
-  relative1 = new THREE.Vector2(0 - everything.position.x - island1.position, 0 - everything.position.z - island1.position);
+  relative1 = new THREE.Vector2(everything.position.x + island1.position.x, everything.position.z + island1.position.z);
   if (pos.distanceTo(relative1) < 10){
     i1t += .001;
     if (i1t > .2){
@@ -547,7 +616,7 @@ function animate() {
     };
   };
 
-  relative3 = new THREE.Vector2(65 + everything.position.x, 10 + everything.position.z);
+  relative3 = new THREE.Vector2(90 + everything.position.x + island3.position.x, -7 + everything.position.z + island3.position.z);
   if (pos.distanceTo(relative3) < 10){
     i3t += .001;
     if (i3t > .2){
@@ -558,11 +627,28 @@ function animate() {
     };
   };
 
-  if (pos.distanceTo(island0.position) < 4){
-  p1 += .002
-  var move = 35 + (35 * Math.sin(p1));
-  island1.position.x = move;
-  everything.position.x = -move;
+  //main island's moving platform
+  if (pos.distanceTo(relative1) < 4){
+    p1 += .002
+    move = 35 + (35 * Math.sin(p1));
+    island1.position.x = move;
+    everything.position.x = -(move + move2);
+  };
+
+  //L island's moving platform
+  if (pos.distanceTo(relative3) < 6){
+    p2 += .002
+    move2 = -8 + (15 * Math.sin(p2));
+    island3.position.x = move2;
+    everything.position.x = -(move + move2);
+  };
+
+  //main island's secret moving platform
+  if (pos.distanceTo(relative4) < 4){
+    p4 += .002
+    move4 = -(40 * Math.cos(p4)) + 40 + 15;
+    island4.position.z = move4;
+    everything.position.z = -move4 + 15;
   };
 
   //bird flapping
