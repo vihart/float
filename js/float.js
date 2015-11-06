@@ -10,7 +10,7 @@ document.body.appendChild( renderer.domElement );
 var scene = new THREE.Scene();
 
 //Create a three.js camera
-var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, .5, 10000 );
+var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, .01, 10 );
 scene.add(camera);
 
 //Apply VR headset positional data to camera.
@@ -744,6 +744,7 @@ plant2.position.set(84,0,-19)
 everything.add(plant2);
 
 everything.scale.set(c,c,c);
+everything.position.y = -0.1;
 scene.add(everything);
 
 var i0t = 0;
@@ -944,7 +945,7 @@ function animate() {
     birdglow.position.set(glowbird.position.x, glowbird.position.y + 3, glowbird.position.z)
 
     //plant1
-  relativePlant1 = new THREE.Vector2(plant1.position.x + everything.position.x, plant1.position.z + everything.position.z);
+  relativePlant1 = new THREE.Vector2(plant1.position.x*c + everything.position.x, plant1.position.z*c + everything.position.z);
   if (relativePlant1.distanceTo(pos) < 20*c){
     g1 += .005;
     plant1.scale.x = Math.min(15, 3+g1);
