@@ -592,6 +592,11 @@ light2.position.set( 50,10,20);
 light2.castShadow = true;
 everything.add( light2 );
 
+var light3 = new THREE.PointLight( 0xffffff, 1, 100);
+light3.position.set( 0,10,80);
+light3.castShadow = true;
+everything.add( light3 );
+
 var p1 = -1;
 var p2 = 6.2;
 var p4 = 0;
@@ -684,6 +689,8 @@ var relative5 = 0;
 var relative6 = 0;
 var relative7 = 0;
 var relative8 = 0;
+
+var crouchHeight = 15;
 
 /*
 Request animation frame loop function
@@ -793,38 +800,38 @@ function animate() {
   };
 
   //main island's moving platform
-  if (pos.distanceTo(relative1) < 4){
-    p1 += .002
+  if ((pos.distanceTo(relative1) < 4) && (camera.position.y < crouchHeight)){
+    p1 += (0.002*crouchHeight)/camera.position.y;
     move = 35 + (35 * Math.sin(p1));
     island1.position.x = move;
     // everything.position.x = -(move + move2);
   };
 
   //L island's moving platform
-  if (pos.distanceTo(relative3) < 10){
-    p2 += .002
+  if ((pos.distanceTo(relative3) < 10) && (camera.position.y < crouchHeight)){
+    p2 += (0.002*crouchHeight)/camera.position.y;
     move2 = (30 * Math.sin(p2));
     island3.position.x = move2;
     // everything.position.x = -(move + move2);
   };
 
   //main island's secret moving platform
-  if (pos.distanceTo(relative4) < 4){
-    p4 += .002
+  if ((pos.distanceTo(relative4) < 4) && (camera.position.y < crouchHeight)){
+    p4 += (0.002*crouchHeight)/camera.position.y;
     move4 = -(40 * Math.cos(p4)) + 40 + 15;
     island4.position.z = move4;
     // everything.position.z = -(move4 + move7) + 15 + 20;
   };
 
     //main island's far double secret moving platform
-  if (pos.distanceTo(relative7) < 8){
-    p7 += .002
+  if ((pos.distanceTo(relative7) < 8) && (camera.position.y < crouchHeight)){
+    p7 += (0.002*crouchHeight)/camera.position.y;
     move7 = -(40 * -Math.cos(p7)) + 40 + 20;
     island7.position.z = move7;
-    island7.position.x = 30*Math.cos((move7-20)/53);
+    island7.position.x = 35*Math.cos((move7-20)/53) - 8;
   };
 
-    everything.position.x = -(move + move2 + 30*Math.cos((move7-20)/53)) + 30 -20;
+    everything.position.x = -(move + move2 + 30*Math.cos((move7-20)/53)) + 30 -30 -8;
     everything.position.z = -(move7 + move4) + 15 + 20 + 78;
 
   //bird flapping
