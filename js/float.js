@@ -1,3 +1,5 @@
+var c = 1/15; //scale factor
+
 // Setup three.js WebGL renderer
 var renderer = new THREE.WebGLRenderer( { antialias: true } );
 
@@ -21,7 +23,7 @@ effect.setSize( window.innerWidth, window.innerHeight );
 //bg color
 renderer.setClearColor( 0xaaddff );
 
-scene.fog = new THREE.FogExp2( 0xaaddff, .02);
+scene.fog = new THREE.FogExp2( 0xaaddff, .02*c);
 
 var everything = new THREE.Object3D();
 
@@ -741,6 +743,7 @@ plant2.scale.set(10,10,10);
 plant2.position.set(84,0,-19)
 everything.add(plant2);
 
+everything.scale.set(c,c,c);
 scene.add(everything);
 
 var i0t = 0;
