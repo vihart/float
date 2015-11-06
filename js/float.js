@@ -23,7 +23,7 @@ effect.setSize( window.innerWidth, window.innerHeight );
 //bg color
 renderer.setClearColor( 0xaaddff );
 
-scene.fog = new THREE.FogExp2( 0xaaddff, .02*c);
+scene.fog = new THREE.FogExp2( 0xaaddff, .02/c);
 
 var everything = new THREE.Object3D();
 
@@ -584,17 +584,17 @@ island2.position.y = -8.5;
 island3.position.y = -8.5;
 
 //lights    
-var light = new THREE.PointLight( 0xffffff, 1, 40);
+var light = new THREE.PointLight( 0xffffff, 1, 40*c);
 light.position.set( -10,25,-25);
 light.castShadow = true;
 everything.add( light );
 
-var light2 = new THREE.PointLight( 0xffffff, 1, 100);
+var light2 = new THREE.PointLight( 0xffffff, 1, 100*c);
 light2.position.set( 50,10,20);
 light2.castShadow = true;
 everything.add( light2 );
 
-var light3 = new THREE.PointLight( 0xffffff, 1, 100);
+var light3 = new THREE.PointLight( 0xffffff, 1, 100*c);
 light3.position.set( 0,10,80);
 light3.castShadow = true;
 everything.add( light3 );
@@ -674,7 +674,7 @@ glowbird.material.color.setRGB(1,1,0.8);
     glowbird.position.x = move8x + 15*Math.cos(p8);
 everything.add(glowbird);
 
-var birdglow = new THREE.PointLight( 0xffffaa, 0, 200);
+var birdglow = new THREE.PointLight( 0xffffaa, 0, 200*c);
 birdglow.castShadow = true;
 everything.add( birdglow );
 
@@ -767,7 +767,7 @@ var relative7 = 0;
 var relative8 = 0;
 var  relativePlant1 = 0;
 
-var crouchHeight = 15;
+var crouchHeight = 15*c;
 
 /*
 Request animation frame loop function
@@ -778,8 +778,8 @@ function animate() {
 
   pos.set(camera.position.x, camera.position.z);
 
-  relative7 = new THREE.Vector2(island7.position.x + everything.position.x, island7.position.z + everything.position.z);
-  if (pos.distanceTo(relative7) < 10){
+  relative7 = new THREE.Vector2(island7.position.x*c + everything.position.x, island7.position.z*c + everything.position.z);
+  if (pos.distanceTo(relative7) < 10*c){
     i7t += .001;
     if (i7t > .2){
       i7grass.children[0].children[0].material.color.setRGB(0.4-i7t,i7t,0.4-i7t); //this will break everything if objs aren't loaded yet
@@ -789,8 +789,8 @@ function animate() {
     };
   };
 
-  relative8 = new THREE.Vector2(island8.position.x + everything.position.x, island8.position.z + everything.position.z);
-  if (pos.distanceTo(relative8) < 10){
+  relative8 = new THREE.Vector2(island8.position.x*c + everything.position.x, island8.position.z*c + everything.position.z);
+  if (pos.distanceTo(relative8) < 10*c){
     i8t += .001;
     birdglow.intensity = Math.min(5*i8t, 1.6);
     if (i8t > .2){
@@ -801,8 +801,8 @@ function animate() {
     };
   };
 
-  relative4 = new THREE.Vector2(island4.position.x + everything.position.x, island4.position.z + everything.position.z);
-  if (pos.distanceTo(relative4) < 10){
+  relative4 = new THREE.Vector2(island4.position.x*c + everything.position.x, island4.position.z*c + everything.position.z);
+  if (pos.distanceTo(relative4) < 10*c){
     i4t += .001;
     if (i4t > .2){
       i4grass.children[0].children[0].material.color.setRGB(0.4-i4t,i4t,0.4-i4t); //this will break everything if objs aren't loaded yet
@@ -812,8 +812,8 @@ function animate() {
     };
   };
 
-  relative5 = new THREE.Vector2(island5.position.x + everything.position.x, island5.position.z + everything.position.z);
-  if (pos.distanceTo(relative5) < 10){
+  relative5 = new THREE.Vector2(island5.position.x*c + everything.position.x, island5.position.z*c + everything.position.z);
+  if (pos.distanceTo(relative5) < 10*c){
     i5t += .001;
     if (i5t > .2){
       i5grass.children[0].children[0].material.color.setRGB(0.4-i5t,i5t,0.4-i5t); //this will break everything if objs aren't loaded yet
@@ -823,8 +823,8 @@ function animate() {
     };
   };
 
-  relative6 = new THREE.Vector2(island6.position.x + everything.position.x, island6.position.z + everything.position.z);
-  if (pos.distanceTo(relative6) < 10){
+  relative6 = new THREE.Vector2(island6.position.x*c + everything.position.x, island6.position.z*c + everything.position.z);
+  if (pos.distanceTo(relative6) < 10*c){
     i6t += .001;
     if (i6t > .2){
       i6grass.children[0].children[0].material.color.setRGB(0.4-i6t,i6t,0.4-i6t); //this will break everything if objs aren't loaded yet
@@ -834,7 +834,7 @@ function animate() {
     };
   };
 
-  if (pos.distanceTo(island0.position) < 15){
+  if (pos.distanceTo(island0.position) < 15*c){
     i0t += .001;
     if (i0t > .2){
       i0grass.children[0].children[0].material.color.setRGB(0.4-i0t,i0t,0.4-i0t); //this will break everything if objs aren't loaded yet
@@ -844,8 +844,8 @@ function animate() {
     };
   };
 
-  relative1 = new THREE.Vector2(everything.position.x + island1.position.x, everything.position.z + island1.position.z);
-  if (pos.distanceTo(relative1) < 10){
+  relative1 = new THREE.Vector2(everything.position.x + island1.position.x*c, everything.position.z + island1.position.z*c);
+  if (pos.distanceTo(relative1) < 10*c){
     i1t += .001;
     if (i1t > .2){
       i1grass.children[0].children[0].material.color.setRGB(0.4-i1t,i1t,0.4-i1t); //this will break everything if objs aren't loaded yet
@@ -854,8 +854,8 @@ function animate() {
       };
     };
   };
-  relative2 = new THREE.Vector2(65 + everything.position.x, - 15 + everything.position.z);
-  if (pos.distanceTo(relative2) < 10){
+  relative2 = new THREE.Vector2(65*c + everything.position.x, - 15*c + everything.position.z);
+  if (pos.distanceTo(relative2) < 10*c){
     i2t += .001;
     if (i2t > .2){
       i2grass.children[0].children[0].material.color.setRGB(0.4-i2t,i2t,0.4-i2t); //this will break everything if objs aren't loaded yet
@@ -865,8 +865,8 @@ function animate() {
     };
   };
 
-  relative3 = new THREE.Vector2(90 + everything.position.x + island3.position.x, 2 + everything.position.z + island3.position.z);
-  if (pos.distanceTo(relative3) < 10){
+  relative3 = new THREE.Vector2(90*c + everything.position.x + island3.position.x*c, 2*c + everything.position.z + island3.position.z*c);
+  if (pos.distanceTo(relative3) < 10*c){
     i3t += .001;
     if (i3t > .2){
       i3grass.children[0].children[0].material.color.setRGB(0.4-i3t,i3t,0.4-i3t); //this will break everything if objs aren't loaded yet
@@ -877,7 +877,7 @@ function animate() {
   };
 
   //main island's moving platform
-  if ((pos.distanceTo(relative1) < 4) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
+  if ((pos.distanceTo(relative1) < 4*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p1 += (0.002*crouchHeight)/camera.position.y;
     move = 35 + (35 * Math.sin(p1));
     island1.position.x = move;
@@ -885,7 +885,7 @@ function animate() {
   };
 
   //L island's moving platform
-  if ((pos.distanceTo(relative3) < 10) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
+  if ((pos.distanceTo(relative3) < 10*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p2 += (0.002*crouchHeight)/camera.position.y;
     move2 = (30 * Math.sin(p2));
     island3.position.x = move2;
@@ -893,7 +893,7 @@ function animate() {
   };
 
   //main island's secret moving platform
-  if ((pos.distanceTo(relative4) < 4) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
+  if ((pos.distanceTo(relative4) < 4*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p4 += (0.002*crouchHeight)/camera.position.y;
     move4 = -(40 * Math.cos(p4)) + 40 + 15;
     island4.position.z = move4;
@@ -901,7 +901,7 @@ function animate() {
   };
 
     //main island's far double secret moving platform
-  if ((pos.distanceTo(relative7) < 8) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
+  if ((pos.distanceTo(relative7) < 8*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p7 += (0.002*crouchHeight)/camera.position.y;
     move7 = -(40 * -Math.cos(p7)) + 40 + 20;
     island7.position.z = move7;
@@ -909,7 +909,7 @@ function animate() {
   };
 
   //glowbird island's circle
-  if ((pos.distanceTo(relative8) < 8) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
+  if ((pos.distanceTo(relative8) < 8*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p8 += (0.002*crouchHeight)/camera.position.y;
     move8z = 70*Math.sin(p8/6);
     move8x = 125*Math.cos(p8/6)+25;
@@ -920,8 +920,8 @@ function animate() {
 
   };
 
-    everything.position.x = -(move8x + move + move2 + 30*Math.cos((move7-20)/53)) + 30 -30 -4 +150;
-    everything.position.z = -(move8z + move7 + move4) + 15 + 20 + 78;
+    everything.position.x = c*( -(move8x + move + move2 + 30*Math.cos((move7-20)/53)) + 30 -30 -4 +150 );
+    everything.position.z = c*( -(move8z + move7 + move4) + 15 + 20 + 78 );
 
   //bird flapping
   for (var i = 0; i < birdNumber; i++){
@@ -945,7 +945,7 @@ function animate() {
 
     //plant1
   relativePlant1 = new THREE.Vector2(plant1.position.x + everything.position.x, plant1.position.z + everything.position.z);
-  if (relativePlant1.distanceTo(pos) < 20){
+  if (relativePlant1.distanceTo(pos) < 20*c){
     g1 += .005;
     plant1.scale.x = Math.min(15, 3+g1);
     plant1.scale.z = Math.min(15, 3+g1);
