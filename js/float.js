@@ -609,6 +609,8 @@ var move7 = -(40 * -Math.cos(p7)) + 40 + 20;
 var move8z = 50*Math.sin(p8/100);
 var move8x = 125*Math.cos(p8/100)+25;
 
+var g1 = 0;
+
 var t = 0;
 var pos = new THREE.Vector2(0,0);
 
@@ -670,9 +672,74 @@ glowbird.material.color.setRGB(1,1,0.8);
     glowbird.position.x = move8x + 15*Math.cos(p8);
 everything.add(glowbird);
 
-var birdglow = new THREE.PointLight( 0xffffaa, 0, 100);
+var birdglow = new THREE.PointLight( 0xffffaa, 0, 200);
 birdglow.castShadow = true;
 everything.add( birdglow );
+
+//plant
+var phi = 1.618033988749894848;
+var pi = 3.14159265359;
+
+// var plant = [];
+
+var petal = [];
+var petalNumber = 20;
+var plant1 = new THREE.Object3D();
+var bloom1 = 3;
+
+for (var i = 0; i < petalNumber; i++){
+  petal[i] = new THREE.Mesh(
+      new THREE.OctahedronGeometry(1),
+      new THREE.MeshLambertMaterial()
+      );
+
+  petal[i].geometry.vertices[0].set(1,bloom1,0);
+  petal[i].geometry.vertices[1].set(-1,bloom1,0);
+  petal[i].geometry.vertices[2].set(0,0.05,0.1);
+  petal[i].geometry.vertices[3].set(0,-0.8,-0.1);
+  petal[i].geometry.vertices[4].set(0,-0.8,0.1);
+  petal[i].geometry.vertices[5].set(0,0.05,-0.1);
+
+  var petalScale = (petalNumber - i + 1) / 50;
+  petal[i].scale.set(petalScale,petalScale,petalScale);
+  petal[i].material.color.setRGB(1,i/10,0);
+  petal[i].position.y = i/25;
+  petal[i].rotation.y = i*pi*phi;
+  plant1.add(petal[i]);
+};
+plant1.scale.set(3,8,3);
+plant1.position.set(88,0,-15)
+everything.add(plant1);
+
+//smaller plant
+var petal2 = [];
+var petal2Number = 10;
+var plant2 = new THREE.Object3D();
+var bloom2 = .5;
+
+for (var i = 0; i < petal2Number; i++){
+  petal2[i] = new THREE.Mesh(
+      new THREE.OctahedronGeometry(1),
+      new THREE.MeshLambertMaterial()
+      );
+
+  petal2[i].geometry.vertices[0].set(0.8,bloom2,0);
+  petal2[i].geometry.vertices[1].set(-0.8,bloom2,0);
+  petal2[i].geometry.vertices[2].set(0,0.05,0.5);
+  petal2[i].geometry.vertices[3].set(0,-0.3,-0.5);
+  petal2[i].geometry.vertices[4].set(0,-0.3,0.5);
+  petal2[i].geometry.vertices[5].set(0,0.05,-0.5);
+
+  var petal2Scale = (petal2Number - i + 1) / 50;
+  petal2[i].scale.set(petal2Scale,petal2Scale,petal2Scale);
+  petal2[i].material.color.setRGB(i/10,1,0);
+  petal2[i].position.y = i/100;
+  petal2[i].rotation.y = i*pi*phi;
+  plant2.add(petal2[i]);
+};
+plant2.scale.set(10,10,10);
+plant2.position.set(84,0,-19)
+everything.add(plant2);
 
 scene.add(everything);
 
@@ -721,7 +788,7 @@ function animate() {
   relative8 = new THREE.Vector2(island8.position.x + everything.position.x, island8.position.z + everything.position.z);
   if (pos.distanceTo(relative8) < 10){
     i8t += .001;
-    birdglow.intensity = 5*i8t;
+    birdglow.intensity = Math.min(5*i8t, 1.6);
     if (i8t > .2){
       i8grass.children[0].children[0].material.color.setRGB(0.4-i8t,i8t,0.4-i8t); //this will break everything if objs aren't loaded yet
       if (i8t < .4){
@@ -806,7 +873,7 @@ function animate() {
   };
 
   //main island's moving platform
-  if ((pos.distanceTo(relative1) < 4) && (camera.position.y < crouchHeight)){
+  if ((pos.distanceTo(relative1) < 4) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p1 += (0.002*crouchHeight)/camera.position.y;
     move = 35 + (35 * Math.sin(p1));
     island1.position.x = move;
@@ -814,7 +881,7 @@ function animate() {
   };
 
   //L island's moving platform
-  if ((pos.distanceTo(relative3) < 10) && (camera.position.y < crouchHeight)){
+  if ((pos.distanceTo(relative3) < 10) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p2 += (0.002*crouchHeight)/camera.position.y;
     move2 = (30 * Math.sin(p2));
     island3.position.x = move2;
@@ -822,7 +889,7 @@ function animate() {
   };
 
   //main island's secret moving platform
-  if ((pos.distanceTo(relative4) < 4) && (camera.position.y < crouchHeight)){
+  if ((pos.distanceTo(relative4) < 4) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p4 += (0.002*crouchHeight)/camera.position.y;
     move4 = -(40 * Math.cos(p4)) + 40 + 15;
     island4.position.z = move4;
@@ -830,7 +897,7 @@ function animate() {
   };
 
     //main island's far double secret moving platform
-  if ((pos.distanceTo(relative7) < 8) && (camera.position.y < crouchHeight)){
+  if ((pos.distanceTo(relative7) < 8) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p7 += (0.002*crouchHeight)/camera.position.y;
     move7 = -(40 * -Math.cos(p7)) + 40 + 20;
     island7.position.z = move7;
@@ -838,7 +905,7 @@ function animate() {
   };
 
   //glowbird island's circle
-  if ((pos.distanceTo(relative8) < 8) && (camera.position.y < crouchHeight)){
+  if ((pos.distanceTo(relative8) < 8) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p8 += (0.002*crouchHeight)/camera.position.y;
     move8z = 70*Math.sin(p8/6);
     move8x = 125*Math.cos(p8/6)+25;
@@ -871,6 +938,25 @@ function animate() {
     glowbird.position.y = 7 + Math.sin(t/23);
     glowbird.geometry.verticesNeedUpdate = true;
     birdglow.position.set(glowbird.position.x, glowbird.position.y + 3, glowbird.position.z)
+
+    //plant1
+
+  if (camera.position.distanceTo(plant1.position) < 35){
+    g1 += .005;
+    plant1.scale.x = Math.min(15, 3+g1);
+    plant1.scale.z = Math.min(15, 3+g1);
+    plant1.scale.y = Math.min(30, 8+g1);
+    bloom1 = Math.max(0.5, 3-(g1/10));
+    for (var i = 0; i < petalNumber; i++){
+      petal[i].geometry.vertices[0].set(1, bloom1 + Math.sin(g1)/10, 0);
+      petal[i].geometry.vertices[1].set(-1, bloom1 + Math.sin(g1)/10, 0);
+      petal[i].geometry.verticesNeedUpdate = true;
+    };
+    plant1.position.y = Math.min(g1/3, 7);
+
+    plant2.scale.set(Math.min(10+(g1/2), 20),Math.min(10+g1, 40),Math.min(10+(g1/2), 20));
+  }
+
 
   //rolling clouds
   for (var i = 0; i < plane2.geometry.vertices.length; i++){
