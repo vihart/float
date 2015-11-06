@@ -30,7 +30,7 @@ var planeGeometry = new THREE.PlaneGeometry( 200, 170, 100, 100 );
 var planeMaterial = new THREE.MeshLambertMaterial( {color: 0x88ff66, side: THREE.DoubleSide, wireframe:false} );
 var plane = new THREE.Mesh( planeGeometry, planeMaterial );
 plane.rotation.x = 1.58;
-plane.position.y = -20;
+plane.position.y = -25;
 plane.position.x = 30;
 plane.scale.set(2,2,2);
 everything.add( plane );
@@ -601,10 +601,13 @@ var p1 = -1;
 var p2 = 6.2;
 var p4 = 0;
 var p7 = 0;
+var p8 = 0;
 var move = 35 + (35 * Math.sin(p1));
 var move2 = (30 * Math.sin(p2));
 var move4 = -(40 * Math.cos(p4)) + 40 + 15;
-var move7 = -(40 * -Math.cos(p7)) + 40 + 20;
+var move7 = -(40 * -Math.cos(p7)) + 40 + 20;    
+var move8z = 50*Math.sin(p8/100);
+var move8x = 125*Math.cos(p8/100)+25;
 
 var t = 0;
 var pos = new THREE.Vector2(0,0);
@@ -614,7 +617,9 @@ island1.position.x = move;
 island3.position.x = move2;
 island4.position.z = move4;
 island7.position.z = move7;
-island7.position.x = 30*Math.cos((move7-20)/53);
+island7.position.x = 35*Math.cos((move7-20)/53)-8;
+island8.position.z = move8z;
+island8.position.x = move8x;
 // everything.position.x = -(move + move2);
 // everything.position.z = -move4 + 15;
 
@@ -661,7 +666,8 @@ glowbird.geometry.vertices[5].set(0,0.02,-1);
 
 glowbird.scale.set(2,2,2);
 glowbird.material.color.setRGB(1,1,0.8);
-glowbird.position.set(island8.position.x + 10, 10, island8.position.z);
+    glowbird.position.z = move8z + 10*Math.sin(p8);
+    glowbird.position.x = move8x + 15*Math.cos(p8);
 everything.add(glowbird);
 
 var birdglow = new THREE.PointLight( 0xffffaa, 0, 100);
@@ -831,8 +837,20 @@ function animate() {
     island7.position.x = 35*Math.cos((move7-20)/53) - 8;
   };
 
-    everything.position.x = -(move + move2 + 30*Math.cos((move7-20)/53)) + 30 -30 -8;
-    everything.position.z = -(move7 + move4) + 15 + 20 + 78;
+  //glowbird island's circle
+  if ((pos.distanceTo(relative8) < 8) && (camera.position.y < crouchHeight)){
+    p8 += (0.002*crouchHeight)/camera.position.y;
+    move8z = 70*Math.sin(p8/6);
+    move8x = 125*Math.cos(p8/6)+25;
+    island8.position.z = move8z;
+    island8.position.x = move8x;
+    glowbird.position.z = move8z + 10*Math.sin(p8);
+    glowbird.position.x = move8x + 15*Math.cos(p8);
+
+  };
+
+    everything.position.x = -(move8x + move + move2 + 30*Math.cos((move7-20)/53)) + 30 -30 -4 +150;
+    everything.position.z = -(move8z + move7 + move4) + 15 + 20 + 78;
 
   //bird flapping
   for (var i = 0; i < birdNumber; i++){
