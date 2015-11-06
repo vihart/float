@@ -762,6 +762,7 @@ var relative5 = 0;
 var relative6 = 0;
 var relative7 = 0;
 var relative8 = 0;
+var  relativePlant1 = 0;
 
 var crouchHeight = 15;
 
@@ -940,8 +941,8 @@ function animate() {
     birdglow.position.set(glowbird.position.x, glowbird.position.y + 3, glowbird.position.z)
 
     //plant1
-
-  if (camera.position.distanceTo(plant1.position) < 35){
+  relativePlant1 = new THREE.Vector2(plant1.position.x + everything.position.x, plant1.position.z + everything.position.z);
+  if (relativePlant1.distanceTo(pos) < 20){
     g1 += .005;
     plant1.scale.x = Math.min(15, 3+g1);
     plant1.scale.z = Math.min(15, 3+g1);
