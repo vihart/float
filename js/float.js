@@ -687,7 +687,7 @@ var pi = 3.14159265359;
 var pet = [];
 var flower = [];
 var flowerPatch = new THREE.Object3D();
-var flowerNumber = 12;
+var flowerNumber = 8;
 var petNumber = [];
 var bloomness = [];
 var spiky = [];
@@ -737,9 +737,17 @@ for (var i = 0; i < flowerNumber; i++){
   };
 
   flower[i].scale.set(fwidth[i],fheight[i],fwidth[i]);
-  flower[i].position.set(14*Math.random(),0,6*Math.random()-2);
-  flowerPatch.add(flower[i]);
+  if (i > 2){
+    flower[i].position.set(14*Math.random(),0,(1.5*i)-5.5);
+    flowerPatch.add(flower[i]);
+  };
 };
+flower[0].position.set(island5.position.x, island5.position.y, island5.position.z);//floating off main 1
+flower[1].position.set(island6.position.x, island6.position.y, island6.position.z);//floating off main 2
+flower[2].position.set(5,0,-15);// on main
+everything.add(flower[0]);
+everything.add(flower[1]);
+everything.add(flower[2]);
 flowerPatch.position.set(island7.position.x,.1,island7.position.z - 2);
 everything.add(flowerPatch);
 
@@ -984,7 +992,7 @@ function animate() {
   };
 
     everything.position.x = c*( -(move8x + move + move2 + move7x) + 30 -30 -4 +150 );
-    everything.position.z = c*( -(move8z + move7 + move4) + 15 + 20 + 78 );
+    everything.position.z = c*( -(move8z + move7 + move4) + 10 + 20 + 78 );
 
   //bird flapping
   for (var i = 0; i < birdNumber; i++){
