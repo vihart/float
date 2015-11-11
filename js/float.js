@@ -679,6 +679,122 @@ var birdglow = new THREE.PointLight( 0xffffaa, 0, 200*c);
 birdglow.castShadow = true;
 everything.add( birdglow );
 
+//butterfly
+var bufflock = new THREE.Object3D();
+var butterfly = [];
+var butCount = 20;
+for (var i = 0; i < butCount; i++){
+  butterfly[i] = new THREE.Object3D();
+  var overlap = Math.random();
+  var pointy = 3*Math.random();
+  var pointy2 = 3*Math.random();
+  var outa = .4 + Math.random()/2;
+  var outb = .6 + Math.random()/2;
+  var scale = Math.random()*Math.random();
+
+  //top pair of wings
+  buffly = new THREE.Mesh(
+      new THREE.OctahedronGeometry(1),
+      new THREE.MeshBasicMaterial({ color: 0xffffff, vertexColors: THREE.VertexColors })
+      );
+
+  buffly.geometry.vertices[0].set(outa,0,pointy);
+  buffly.geometry.vertices[1].set(-outa,0,pointy);
+  buffly.geometry.vertices[2].set(0,0.02,1);
+  buffly.geometry.vertices[3].set(0,-0.02,-1+overlap);
+  buffly.geometry.vertices[4].set(0,-0.02,1);
+  buffly.geometry.vertices[5].set(0,0.02,-1+overlap);
+
+  var bufA = new THREE.Color(Math.random(),Math.random(),2*Math.random());
+  var bufB = new THREE.Color(Math.random(),Math.random()/2,Math.random());
+  var bufT = new THREE.Color(2*Math.random(),Math.random(),Math.random());
+
+  buffly.geometry.faces[1].vertexColors[0] = bufA;//back of left wing, in-up
+  buffly.geometry.faces[1].vertexColors[1] = bufB;// in-down
+  buffly.geometry.faces[1].vertexColors[2] = bufT;// tip
+  buffly.geometry.faces[2].vertexColors[0] = bufB;//bottom of left wing
+  buffly.geometry.faces[2].vertexColors[1] = bufB;
+  buffly.geometry.faces[2].vertexColors[2] = bufT;
+  buffly.geometry.faces[3].vertexColors[0] = bufB;//left front wing, in-down
+  buffly.geometry.faces[3].vertexColors[1] = bufA;//left front, in-up
+  buffly.geometry.faces[3].vertexColors[2] = bufT;//left front, tip
+  buffly.geometry.faces[4].vertexColors[0] = bufA;//right front, in-up
+  buffly.geometry.faces[4].vertexColors[1] = bufB;//right front, in-down
+  buffly.geometry.faces[4].vertexColors[2] = bufT;//right front, tip
+  buffly.geometry.faces[5].vertexColors[0] = bufB;//underside of right wing
+  buffly.geometry.faces[5].vertexColors[1] = bufB;
+  buffly.geometry.faces[5].vertexColors[2] = bufT;
+  buffly.geometry.faces[6].vertexColors[0] = bufB;//back of right wing, bottom
+  buffly.geometry.faces[6].vertexColors[1] = bufA;//back of right wing, top
+  buffly.geometry.faces[6].vertexColors[2] = bufT;//back of right wing, tip
+  buffly.geometry.faces[7].vertexColors[0] = bufA;//top of right wing
+  buffly.geometry.faces[7].vertexColors[1] = bufA;//
+  buffly.geometry.faces[7].vertexColors[2] = bufT;//
+  buffly.geometry.faces[0].vertexColors[0] = bufA;//top of left wing
+  buffly.geometry.faces[0].vertexColors[1] = bufA;//
+  buffly.geometry.faces[0].vertexColors[2] = bufT;//
+
+  butterfly[i].add(buffly);
+
+  //bottom pair of wings
+  buffly2 = new THREE.Mesh(
+      new THREE.OctahedronGeometry(1),
+      new THREE.MeshBasicMaterial({ color: 0xffff00, vertexColors: THREE.VertexColors })
+      );
+
+  buffly2.geometry.vertices[0].set(outb,0,-pointy2);
+  buffly2.geometry.vertices[1].set(-outb,0,-pointy2);
+  buffly2.geometry.vertices[2].set(0,0.02,1);
+  buffly2.geometry.vertices[3].set(0,-0.02,-1);
+  buffly2.geometry.vertices[4].set(0,-0.02,1);
+  buffly2.geometry.vertices[5].set(0,0.02,-1);
+
+  var buf2T = new THREE.Color(2*Math.random(),Math.random(),2*Math.random());
+  // var buf2Ab = new THREE.Color(.5,0.25,0.25);
+  // var buf2Bb = new THREE.Color(.5,0.25,0.25);
+  // var buf2Tb = new THREE.Color(.5,.5,0.25);
+
+  buffly2.geometry.faces[1].vertexColors[0] = bufA;//back of left wing, in-up
+  buffly2.geometry.faces[1].vertexColors[1] = bufB;// in-down
+  buffly2.geometry.faces[1].vertexColors[2] = buf2T;// tip
+  buffly2.geometry.faces[2].vertexColors[0] = bufB;//bottom of left wing
+  buffly2.geometry.faces[2].vertexColors[1] = bufB;
+  buffly2.geometry.faces[2].vertexColors[2] = buf2T;
+  buffly2.geometry.faces[3].vertexColors[0] = bufB;//left front wing, in-down
+  buffly2.geometry.faces[3].vertexColors[1] = bufA;//left front, in-up
+  buffly2.geometry.faces[3].vertexColors[2] = buf2T;//left front, tip
+  buffly2.geometry.faces[4].vertexColors[0] = bufA;//right front, in-up
+  buffly2.geometry.faces[4].vertexColors[1] = bufB;//right front, in-down
+  buffly2.geometry.faces[4].vertexColors[2] = buf2T;//right front, tip
+  buffly2.geometry.faces[5].vertexColors[0] = bufB;//underside of right wing
+  buffly2.geometry.faces[5].vertexColors[1] = bufB;
+  buffly2.geometry.faces[5].vertexColors[2] = buf2T;
+  buffly2.geometry.faces[6].vertexColors[0] = bufB;//back of right wing, bottom
+  buffly2.geometry.faces[6].vertexColors[1] = bufA;//back of right wing, top
+  buffly2.geometry.faces[6].vertexColors[2] = buf2T;//back of right wing, tip
+  buffly2.geometry.faces[7].vertexColors[0] = bufA;//top of right wing
+  buffly2.geometry.faces[7].vertexColors[1] = bufA;//
+  buffly2.geometry.faces[7].vertexColors[2] = buf2T;//
+  buffly2.geometry.faces[0].vertexColors[0] = bufA;//top of left wing
+  buffly2.geometry.faces[0].vertexColors[1] = bufA;//
+  buffly2.geometry.faces[0].vertexColors[2] = buf2T;//
+
+  buffly2.position.y = -.01;
+
+  butterfly[i].add(buffly2);
+
+  butterfly[i].scale.set(scale,scale,scale);
+  butterfly[i].position.y = 5 + Math.random();
+  butterfly[i].position.x = 5*Math.random();
+  butterfly[i].position.z = 5*Math.random();
+  butterfly[i].rotation.x = -.5;
+  butterfly[i].rotation.y = i;
+
+  bufflock.add(butterfly[i]);
+}
+bufflock.scale.set(.001,.001,.001);
+everything.add(bufflock);
+
 //plants:
 var phi = 1.618033988749894848;
 var pi = 3.14159265359;
@@ -810,6 +926,38 @@ for (var i = 0; i < petal2Number; i++){
 plant2.scale.set(10,10,10);
 plant2.position.set(84,0,-19)
 everything.add(plant2);
+
+//butterfly flower 
+var g3 = pi;
+var petal3 = [];
+var petal3Number = 15;
+var bufflower = new THREE.Object3D();
+var bloom3 = .5;
+
+for (var i = 0; i < petal3Number; i++){
+  petal3[i] = new THREE.Mesh(
+      new THREE.OctahedronGeometry(1),
+      new THREE.MeshLambertMaterial()
+      );
+
+  petal3[i].geometry.vertices[0].set(Math.cos(g3)/2 + 0.51, 2*bloom3 - 6*Math.cos(g3)/10, 0);
+  petal3[i].geometry.vertices[1].set(-Math.cos(g3)/2 - 0.51, 2*bloom3 - 6*Math.cos(g3)/10, 0);
+  petal3[i].geometry.vertices[2].set(0,-Math.cos(g3)/3 + 0.2,Math.cos(g3)/8 + 0.5);
+  petal3[i].geometry.vertices[3].set(0,-0.3,- 0.1);
+  petal3[i].geometry.vertices[4].set(0,-0.3,0.1);
+  petal3[i].geometry.vertices[5].set(0,-Math.cos(g3)/3 + 0.2,-Math.cos(g3)/8 - 0.5);
+
+  var petal3Scale = (petal3Number - i + 1) / 50;
+  petal3[i].scale.set(petal3Scale,petal3Scale,petal3Scale);
+  petal3[i].material.color.setRGB(1, 0.4 - (i/petal3Number), 0.6 - (i/petal3Number));
+  petal3[i].position.y = i/200;
+  petal3[i].rotation.y = i*pi*phi;
+  bufflower.add(petal3[i]);
+};
+bufflower.scale.set(20,20,20);
+bufflower.position.set(-4,0,-17);
+bufflock.position.set(-4,0,-17);
+everything.add(bufflower);
 
 everything.scale.set(c,c,c);
 everything.position.y = -0.1;
@@ -1014,6 +1162,20 @@ function animate() {
     glowbird.geometry.verticesNeedUpdate = true;
     birdglow.position.set(glowbird.position.x, glowbird.position.y + 3, glowbird.position.z)
 
+  //bufflap
+  for (i = 0; i < butCount; i++){
+    var buflappy = 0.5 + Math.sin(t/(2 + 2*(i/butCount)));
+    butterfly[i].children[0].geometry.vertices[0].y = buflappy;
+    butterfly[i].children[0].geometry.vertices[1].y = buflappy;
+    butterfly[i].children[1].geometry.vertices[0].y = buflappy;
+    butterfly[i].children[1].geometry.vertices[1].y = buflappy;
+    butterfly[i].children[0].geometry.verticesNeedUpdate = true;
+    butterfly[i].children[1].geometry.verticesNeedUpdate = true;
+    butterfly[i].position.y = 7 + 2*Math.sin(t/(23+i)) + Math.sin((t+i)/9)/2 + buflappy/5;
+    butterfly[i].position.z = 4*Math.sin(t/(50+i)) + 4*Math.sin(t/(42+i));
+    butterfly[i].position.x = 5*Math.cos(t/(50+i)) + 3*Math.cos(t/(56+i));
+  };
+
     //plant1
   relativePlant1 = new THREE.Vector2(plant1.position.x*c + everything.position.x, plant1.position.z*c + everything.position.z);
   if (relativePlant1.distanceTo(pos) < 20*c){
@@ -1032,6 +1194,22 @@ function animate() {
     plant2.scale.set(Math.min(10+(g1/2), 20),Math.min(10+g1, 40),Math.min(10+(g1/2), 20));
   }
 
+  var relativeFlower = new THREE.Vector2(bufflower.position.x*c + everything.position.x, bufflower.position.z*c + everything.position.z); 
+  if ( pos.distanceTo(relativeFlower) < 5*c && (g3 < 2*pi) ){
+    g3 += .002;
+    var scaley = (g3-pi)/pi;
+    bufflock.scale.set(scaley,scaley,scaley);
+    bufflock.position.y = 5 - 5*scaley;
+    for (var i = 0; i < petal3Number; i++){
+      petal3[i].geometry.vertices[0].set(Math.cos(g3)/2 + 0.51, 2*bloom3 - 6*Math.cos(g3)/10, 0);
+      petal3[i].geometry.vertices[1].set(-Math.cos(g3)/2 - 0.51, 2*bloom3 - 6*Math.cos(g3)/10, 0);
+      petal3[i].geometry.vertices[2].set(0,-Math.cos(g3)/3 + 0.2,Math.cos(g3)/8 + 0.5);
+      petal3[i].geometry.vertices[3].set(0,-0.3,- 0.1);
+      petal3[i].geometry.vertices[4].set(0,-0.3,0.1);
+      petal3[i].geometry.vertices[5].set(0,-Math.cos(g3)/3 + 0.2,-Math.cos(g3)/8 - 0.5);
+      petal3[i].geometry.verticesNeedUpdate = true;
+    };
+  };
 
   //rolling clouds
   for (var i = 0; i < plane2.geometry.vertices.length; i++){
