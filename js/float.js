@@ -681,6 +681,8 @@ everything.add( birdglow );
 
 //butterfly
 var bufflock = new THREE.Object3D();
+var bufflock5 = new THREE.Object3D();
+var bufflock6 = new THREE.Object3D();
 var butterfly = [];
 var butCount = 20;
 for (var i = 0; i < butCount; i++){
@@ -790,10 +792,18 @@ for (var i = 0; i < butCount; i++){
   butterfly[i].rotation.x = -.5;
   butterfly[i].rotation.y = i;
 
-  bufflock.add(butterfly[i]);
+  if (i < 5){
+    bufflock5.add(butterfly[i]);
+  } else if (i < 10){
+    bufflock6.add(butterfly[i]);
+  } else {
+    bufflock.add(butterfly[i]);
+  }
 }
 bufflock.scale.set(.001,.001,.001);
 everything.add(bufflock);
+everything.add(bufflock5);
+everything.add(bufflock6);
 
 //plants:
 var phi = 1.618033988749894848;
@@ -858,8 +868,8 @@ for (var i = 0; i < flowerNumber; i++){
     flowerPatch.add(flower[i]);
   };
 };
-flower[0].position.set(island5.position.x, island5.position.y, island5.position.z);//floating off main 1
-flower[1].position.set(island6.position.x, island6.position.y, island6.position.z);//floating off main 2
+// flower[0].position.set(island5.position.x, island5.position.y, island5.position.z);//floating off main 1
+// flower[1].position.set(island6.position.x, island6.position.y, island6.position.z);//floating off main 2
 flower[2].position.set(5,0,-15);// on main
 everything.add(flower[0]);
 everything.add(flower[1]);
@@ -927,7 +937,8 @@ plant2.scale.set(10,10,10);
 plant2.position.set(84,0,-19)
 everything.add(plant2);
 
-//butterfly flower 
+//blooming flowers
+//Big island 
 var g3 = pi;
 var petal3 = [];
 var petal3Number = 15;
@@ -958,6 +969,72 @@ bufflower.scale.set(20,20,20);
 bufflower.position.set(-4,0,-17);
 bufflock.position.set(-4,0,-17);
 everything.add(bufflower);
+
+//lower floating subisland bloomflower
+var g5 = pi;
+var petal5 = [];
+var petal5Number = 15;
+var bufflower5 = new THREE.Object3D();
+var bloom5 = .8;
+
+for (var i = 0; i < petal5Number; i++){
+  petal5[i] = new THREE.Mesh(
+      new THREE.OctahedronGeometry(1),
+      new THREE.MeshLambertMaterial()
+      );
+
+  petal5[i].geometry.vertices[0].set(Math.cos(g5)/2 + 0.51, 2*bloom5 - 6*Math.cos(g5)/10, 0);
+  petal5[i].geometry.vertices[1].set(-Math.cos(g5)/2 - 0.51, 2*bloom5 - 6*Math.cos(g5)/10, 0);
+  petal5[i].geometry.vertices[2].set(0,-Math.cos(g5)/3 + 0.2,Math.cos(g5)/8 + 0.5);
+  petal5[i].geometry.vertices[3].set(0,-0.3,- 0.1);
+  petal5[i].geometry.vertices[4].set(0,-0.3,0.1);
+  petal5[i].geometry.vertices[5].set(0,-Math.cos(g5)/3 + 0.2,-Math.cos(g5)/8 - 0.5);
+
+  var petal5Scale = (petal5Number - i + 1) / 50;
+  petal5[i].scale.set(petal5Scale,petal5Scale,petal5Scale);
+  petal5[i].material.color.setRGB(.2, 0 + (i/petal5Number), 0.8 + (i/petal5Number));
+  petal5[i].position.y = i/400;
+  petal5[i].rotation.y = i*pi*phi;
+  bufflower5.add(petal5[i]);
+};
+bufflower5.scale.set(15,15,15);
+bufflower5.position.set(island5.position.x, island5.position.y, island5.position.z);
+bufflock5.position.set(island5.position.x, island5.position.y, island5.position.z + 100);
+everything.add(bufflower5);
+
+//higher floating subisland bloomflower 
+var g6 = pi;
+var petal6 = [];
+var petal6Number = 20;
+var bufflower6 = new THREE.Object3D();
+var bloom6 = .4;
+
+for (var i = 0; i < petal6Number; i++){
+  petal6[i] = new THREE.Mesh(
+      new THREE.OctahedronGeometry(1),
+      new THREE.MeshLambertMaterial()
+      );
+
+  petal6[i].geometry.vertices[0].set(Math.cos(g6)/2 + 0.51, 2*bloom6 - 6*Math.cos(g6)/10, 0);
+  petal6[i].geometry.vertices[1].set(-Math.cos(g6)/2 - 0.51, 2*bloom6 - 6*Math.cos(g6)/10, 0);
+  petal6[i].geometry.vertices[2].set(0,-Math.cos(g6)/3 + 0.2,Math.cos(g6)/8 + 0.5);
+  petal6[i].geometry.vertices[3].set(0,-0.3,- 0.1);
+  petal6[i].geometry.vertices[4].set(0,-0.3,0.1);
+  petal6[i].geometry.vertices[5].set(0,-Math.cos(g6)/3 + 0.2,-Math.cos(g6)/8 - 0.5);
+
+  var petal6Scale = (petal6Number - i + 1) / 50;
+  petal6[i].scale.set(petal6Scale,petal6Scale,petal6Scale);
+  petal6[i].material.color.setRGB(0.9, 1 - (i/petal6Number), 0.4 - (i/petal6Number));
+  petal6[i].position.y = i/100;
+  petal6[i].rotation.y = i*pi*phi;
+  bufflower6.add(petal6[i]);
+};
+bufflower6.scale.set(10,10,10);
+bufflower6.position.set(island6.position.x, island6.position.y, island6.position.z);
+bufflock6.position.set(island6.position.x, island6.position.y, island6.position.z + 100);
+everything.add(bufflower6);
+
+
 
 everything.scale.set(c,c,c);
 everything.position.y = -0.1;
@@ -1194,6 +1271,7 @@ function animate() {
     plant2.scale.set(Math.min(10+(g1/2), 20),Math.min(10+g1, 40),Math.min(10+(g1/2), 20));
   }
 
+  //main island blooming flower
   var relativeFlower = new THREE.Vector2(bufflower.position.x*c + everything.position.x, bufflower.position.z*c + everything.position.z); 
   if ( pos.distanceTo(relativeFlower) < 5*c && (g3 < 2*pi) ){
     g3 += .002;
@@ -1210,6 +1288,41 @@ function animate() {
       petal3[i].geometry.verticesNeedUpdate = true;
     };
   };
+
+    //lower sub island blooming flower
+  var relativeFlower5 = new THREE.Vector2(bufflower5.position.x*c + everything.position.x, bufflower5.position.z*c + everything.position.z); 
+  if ( pos.distanceTo(relativeFlower5) < 5*c && (g5 < 2*pi) ){
+    g5 += .002;
+    for (var i = 0; i < petal5Number; i++){ 
+      petal5[i].geometry.vertices[0].set(Math.cos(g5)/2 + 0.51, 2*bloom5 - 6*Math.cos(g5)/10, 0);
+      petal5[i].geometry.vertices[1].set(-Math.cos(g5)/2 - 0.51, 2*bloom5 - 6*Math.cos(g5)/10, 0);
+      petal5[i].geometry.vertices[2].set(0,-Math.cos(g5)/3 + 0.2,Math.cos(g5)/8 + 0.5);
+      petal5[i].geometry.vertices[3].set(0,-0.3,- 0.1);
+      petal5[i].geometry.vertices[4].set(0,-0.3,0.1);
+      petal5[i].geometry.vertices[5].set(0,-Math.cos(g5)/3 + 0.2,-Math.cos(g5)/8 - 0.5);
+      petal5[i].geometry.verticesNeedUpdate = true;
+    };
+  };
+  //upper sub island blooming flower
+  var relativeFlower6 = new THREE.Vector2(bufflower6.position.x*c + everything.position.x, bufflower6.position.z*c + everything.position.z); 
+  if ( pos.distanceTo(relativeFlower6) < 5*c && (g6 < 2*pi) ){
+    g6 += .002;
+    for (var i = 0; i < petal6Number; i++){ 
+      petal6[i].geometry.vertices[0].set(Math.cos(g6)/2 + 0.51, 2*bloom6 - 6*Math.cos(g6)/10, 0);
+      petal6[i].geometry.vertices[1].set(-Math.cos(g6)/2 - 0.51, 2*bloom6 - 6*Math.cos(g6)/10, 0);
+      petal6[i].geometry.vertices[2].set(0,-Math.cos(g6)/3 + 0.2,Math.cos(g6)/8 + 0.5);
+      petal6[i].geometry.vertices[3].set(0,-0.3,- 0.1);
+      petal6[i].geometry.vertices[4].set(0,-0.3,0.1);
+      petal6[i].geometry.vertices[5].set(0,-Math.cos(g6)/3 + 0.2,-Math.cos(g6)/8 - 0.5);
+      petal6[i].geometry.verticesNeedUpdate = true;
+    };
+  };
+  if (g6 > 3*pi/2){
+    bufflock6.position.set(island6.position.x, island6.position.y, island6.position.z + 100/g6);
+  }
+  if (g5 > 3*pi/2){
+    bufflock5.position.set(island5.position.x, island5.position.y, island5.position.z + 100/g5);
+  }
 
   //rolling clouds
   for (var i = 0; i < plane2.geometry.vertices.length; i++){
