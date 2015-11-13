@@ -27,8 +27,28 @@ scene.fog = new THREE.FogExp2( 0xaaddff, .02/c);
 
 
 var music1 = document.querySelector('#child3');
-var go1 = document.querySelector('#cube1');
-var fishNoise = document.querySelector('#fishNoise');
+var intro = document.querySelector('#intro');
+var outro = document.querySelector('#outro');
+var start = document.querySelector('#start');
+var stop = document.querySelector('#stop');
+var close1 = document.querySelector('#close1');
+var close3 = document.querySelector('#close3');
+var close4 = document.querySelector('#close4');
+var close7 = document.querySelector('#close7');
+var close8 = document.querySelector('#close8');
+var go1 = document.querySelector('#go1');
+var go3 = document.querySelector('#go3');
+var go4 = document.querySelector('#go4');
+var go7 = document.querySelector('#go7')
+var go8 = document.querySelector('#go8');;
+var bloomHigh = document.querySelector('#bloomHigh');
+var bloomMed = document.querySelector('#bloomMed');
+var bloomLow = document.querySelector('#bloomLow');
+var bloomSigh = document.querySelector('#bloomSigh');
+var bloomSigh2 = document.querySelector('#bloomSigh2');
+var bloomSigh3 = document.querySelector('#bloomSigh3');
+var bloomSighTree = document.querySelector('#bloomSighTree');
+var birdNoise = document.querySelector('#bird');
 
 var everything = new THREE.Object3D();
 
@@ -1076,9 +1096,15 @@ var relative6 = 0;
 var relative7 = 0;
 var relative8 = 0;
 var  relativePlant1 = 0;
+var relativeFlock = 0;
 
 var crouchHeight = 15*c;
 
+var goTog1 = 0; // go toggle for moving island 1
+var goTog3 = 0;
+var goTog4 = 0;
+var goTog7 = 0;
+var goTog8 = 0;
 /*
 Request animation frame loop function
 */
@@ -1192,7 +1218,22 @@ function animate() {
     move = 35 + (35 * Math.sin(p1));
     island1.position.x = move;
     go1.play();
-    // everything.position.x = -(move + move2);
+    if (goTog1 == 0){
+      start.play();
+      goTog1 = 1;
+    }
+  }else{
+    go1.pause();
+    if (goTog1 == 1){
+      stop.play();
+      goTog1 = 0;
+    }
+  }
+  if (pos.distanceTo(relative1) < 7*c){
+    close1.play();
+    close1.volume = Math.min(1 , 2/(20*pos.distanceTo(relative1)));
+  }else{
+    close1.pause();
   };
 
   //L island's moving platform
@@ -1200,7 +1241,23 @@ function animate() {
     p2 += (0.002*crouchHeight)/camera.position.y;
     move2 = (30 * Math.sin(p2));
     island3.position.x = move2;
-    // everything.position.x = -(move + move2);
+    go3.play();
+    if (goTog3 == 0){
+      start.play();
+      goTog3 = 1;
+    }
+  }else{
+    go3.pause();
+    if (goTog3 == 1){
+      stop.play();
+      goTog3 = 0;
+    }
+  }
+  if (pos.distanceTo(relative3) < 15*c){
+    close3.play();
+    close3.volume = Math.min(1 , 2/(10*pos.distanceTo(relative3)));
+  }else{
+    close3.pause();
   };
 
   //main island's secret moving platform
@@ -1208,7 +1265,23 @@ function animate() {
     p4 += (0.002*crouchHeight)/camera.position.y;
     move4 = -(40 * Math.cos(p4)) + 40 + 15;
     island4.position.z = move4;
-    // everything.position.z = -(move4 + move7) + 15 + 20;
+    go4.play();
+    if (goTog4 == 0){
+      start.play();
+      goTog4 = 1;
+    }
+  }else{
+    go4.pause();
+    if (goTog4 == 1){
+      stop.play();
+      goTog4 = 0;
+    }
+  }
+  if (pos.distanceTo(relative4) < 7*c){
+    close4.play();
+    close4.volume = Math.min(1 , 2/(20*pos.distanceTo(relative4)));
+  }else{
+    close4.pause();
   };
 
     //main island's far double secret moving platform
@@ -1221,6 +1294,23 @@ function animate() {
     flowerPatch.position.set(island7.position.x,.1,island7.position.z - 2);
     bufflock2.position.set(flowerPatch.position.x + 10, flowerPatch.position.y, flowerPatch.position.z);
     flower[0].position.set(island7.position.x + 16, island7.position.y, island7.position.z - 1);
+    go7.play();
+    if (goTog7 == 0){
+      start.play();
+      goTog7 = 1;
+    }
+  }else{
+    go7.pause();
+    if (goTog7 == 1){
+      stop.play();
+      goTog7 = 0;
+    }
+  }
+  if (pos.distanceTo(relative7) < 10*c){
+    close7.play();
+    close7.volume = Math.min(1 , 2/(10*pos.distanceTo(relative7)));
+  }else{
+    close7.pause();
   };
 
   //glowbird island's circle
@@ -1232,7 +1322,23 @@ function animate() {
     island8.position.x = move8x;
     glowbird.position.z = move8z + 10*Math.sin(p8);
     glowbird.position.x = move8x + 15*Math.cos(p8);
-
+    go8.play();
+    if (goTog8 == 0){
+      start.play();
+      goTog8 = 1;
+    }
+  }else{
+    go8.pause();
+    if (goTog8 == 1){
+      stop.play();
+      goTog8 = 0;
+    }
+  }
+  if (pos.distanceTo(relative8) < 8*c){
+    close8.play();
+    close8.volume = Math.min(1 , 2/(15*pos.distanceTo(relative8)));
+  }else{
+    close8.pause();
   };
 
     everything.position.x = c*( -(move8x + move + move2 + move7x) + 30 -30 -4 +150 );
@@ -1277,7 +1383,7 @@ function animate() {
     //plant1
   relativePlant1 = new THREE.Vector2(plant1.position.x*c + everything.position.x, plant1.position.z*c + everything.position.z);
   if (relativePlant1.distanceTo(pos) < 20*c){
-    g1 += .01;
+    g1 += .02;
     plant1.scale.x = Math.min(15, 3+g1);
     plant1.scale.z = Math.min(15, 3+g1);
     plant1.scale.y = Math.min(30, 8+g1);
@@ -1290,12 +1396,18 @@ function animate() {
     plant1.position.y = Math.min(g1/3, 7);
 
     plant2.scale.set(Math.min(10+(g1/2), 20),Math.min(10+g1, 40),Math.min(10+(g1/2), 20));
-  }
+    if(g1 < 20){
+      bloomSighTree.play();
+    }
+  }else{
+    bloomSighTree.pause();
+  };
 
   //main island blooming flower
   var relativeFlower = new THREE.Vector2(bufflower.position.x*c + everything.position.x, bufflower.position.z*c + everything.position.z); 
   if ( pos.distanceTo(relativeFlower) < 8*c && (g3 < 2*pi) ){
-    g3 += .002;
+    g3 += .003;
+    bloomSigh.play();
     for (var i = 0; i < petal3Number; i++){
       petal3[i].geometry.vertices[0].set(Math.cos(g3)/2 + 0.51, 2*bloom3 - 6*Math.cos(g3)/10, 0);
       petal3[i].geometry.vertices[1].set(-Math.cos(g3)/2 - 0.51, 2*bloom3 - 6*Math.cos(g3)/10, 0);
@@ -1305,12 +1417,15 @@ function animate() {
       petal3[i].geometry.vertices[5].set(0,-Math.cos(g3)/3 + 0.2,-Math.cos(g3)/8 - 0.5);
       petal3[i].geometry.verticesNeedUpdate = true;
     };
+  }else{
+    bloomSigh.pause();
   };
 
     //lower sub island blooming flower
   var relativeFlower5 = new THREE.Vector2(bufflower5.position.x*c + everything.position.x, bufflower5.position.z*c + everything.position.z); 
   if ( pos.distanceTo(relativeFlower5) < 8*c && (g5 < 2*pi) ){
-    g5 += .002;
+    g5 += .003;
+    bloomSigh2.play();
     for (var i = 0; i < petal5Number; i++){ 
       petal5[i].geometry.vertices[0].set(Math.cos(g5)/2 + 0.51, 2*bloom5 - 6*Math.cos(g5)/10, 0);
       petal5[i].geometry.vertices[1].set(-Math.cos(g5)/2 - 0.51, 2*bloom5 - 6*Math.cos(g5)/10, 0);
@@ -1320,11 +1435,14 @@ function animate() {
       petal5[i].geometry.vertices[5].set(0,-Math.cos(g5)/3 + 0.2,-Math.cos(g5)/8 - 0.5);
       petal5[i].geometry.verticesNeedUpdate = true;
     };
+  }else{
+    bloomSigh2.pause();
   };
   //upper sub island blooming flower
   var relativeFlower6 = new THREE.Vector2(bufflower6.position.x*c + everything.position.x, bufflower6.position.z*c + everything.position.z); 
   if ( pos.distanceTo(relativeFlower6) < 8*c && (g6 < 2*pi) ){
-    g6 += .002;
+    g6 += .003;
+    bloomSigh3.play();
     for (var i = 0; i < petal6Number; i++){ 
       petal6[i].geometry.vertices[0].set(Math.cos(g6)/2 + 0.51, 2*bloom6 - 6*Math.cos(g6)/10, 0);
       petal6[i].geometry.vertices[1].set(-Math.cos(g6)/2 - 0.51, 2*bloom6 - 6*Math.cos(g6)/10, 0);
@@ -1334,17 +1452,22 @@ function animate() {
       petal6[i].geometry.vertices[5].set(0,-Math.cos(g6)/3 + 0.2,-Math.cos(g6)/8 - 0.5);
       petal6[i].geometry.verticesNeedUpdate = true;
     };
+  }else{
+    bloomSigh3.pause();
   };
-  if ((g6 > 3*pi/2) && ((-150 + b6) < bufflower6.position.z)){
+  if ((g6 > 4.5) && ((-150 + b6) < bufflower6.position.z)){
     b6 += 0.4;
+    bloomHigh.play();
     bufflock6.position.set(bufflower6.position.x, bufflower6.position.y, -150 + b6);
   }
-  if ((g5 > 3*pi/2) && ((-150 + b5) < bufflower5.position.z)){
+  if ((g5 > 4.5) && ((-150 + b5) < bufflower5.position.z)){
     b5 += 0.4;
+    bloomMed.play();
     bufflock5.position.set(bufflower5.position.x, bufflower5.position.y, -150 + b5);
   }
-  if ((g3 > 3*pi/2) && ((-150 + b0) < bufflower.position.z)){
+  if ((g3 > 4.5) && ((-150 + b0) < bufflower.position.z)){
     b0 += 0.4;
+    bloomLow.play();
     bufflock.position.set(bufflower.position.x + 5, bufflower.position.y, -150 + b0);
   }
 
@@ -1356,6 +1479,9 @@ function animate() {
 
   //L island music
   music1.volume = Math.min(1, 2/(pos.distanceTo(relative2)*pos.distanceTo(relative2)*pos.distanceTo(relative2)));
+
+  relativeFlock = new THREE.Vector2(c*flock.position.x + everything.position.x, c*flock.position.z + everything.position.z);
+  birdNoise.volume = Math.min(1, 10/(10*(pos.distanceTo(relativeFlock))));
 
   //Update VR headset position and apply to camera.
   controls.update();
