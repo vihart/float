@@ -25,6 +25,11 @@ renderer.setClearColor( 0xaaddff );
 
 scene.fog = new THREE.FogExp2( 0xaaddff, .02/c);
 
+
+var music1 = document.querySelector('#child3');
+var go1 = document.querySelector('#cube1');
+var fishNoise = document.querySelector('#fishNoise');
+
 var everything = new THREE.Object3D();
 
 //ground
@@ -631,7 +636,7 @@ island8.position.x = move8x;
 //bird
 var bird = [];
 var birdseed = [];
-var birdNumber = 20;
+var birdNumber = 15;
 var flock = new THREE.Object3D();
 
 for (var i = 0; i < birdNumber; i++){
@@ -640,17 +645,18 @@ for (var i = 0; i < birdNumber; i++){
       new THREE.MeshLambertMaterial()
       );
 
-  bird[i].geometry.vertices[0].set(1,0,0);
-  bird[i].geometry.vertices[1].set(-1,0,0);
-  bird[i].geometry.vertices[2].set(0,0.02,1);
-  bird[i].geometry.vertices[3].set(0,-0.02,-1);
-  bird[i].geometry.vertices[4].set(0,-0.02,1);
-  bird[i].geometry.vertices[5].set(0,0.02,-1);
+  bird[i].geometry.vertices[0].set(2,0,0);
+  bird[i].geometry.vertices[1].set(-2,0,0);
+  bird[i].geometry.vertices[2].set(0,0.02,0.5);
+  bird[i].geometry.vertices[3].set(0,-0.02,-0.5);
+  bird[i].geometry.vertices[4].set(0,-0.02,0.5);
+  bird[i].geometry.vertices[5].set(0,0.02,-0.5);
 
   birdseed[i] = Math.random();
   var birdscale = 2*Math.random()*Math.random() + .5;
   bird[i].scale.set(birdscale,birdscale,birdscale);
-  bird[i].material.color.setRGB(Math.random(), Math.random(), Math.random());
+  var birdBrightness = 0.25 + (3*Math.random())/4;
+  bird[i].material.color.setRGB(birdBrightness, birdBrightness, birdBrightness + Math.random()/2);
 
   flock.add(bird[i]);
 };
@@ -681,10 +687,11 @@ everything.add( birdglow );
 
 //butterfly
 var bufflock = new THREE.Object3D();
+var bufflock2 = new THREE.Object3D();
 var bufflock5 = new THREE.Object3D();
 var bufflock6 = new THREE.Object3D();
 var butterfly = [];
-var butCount = 20;
+var butCount = 30;
 for (var i = 0; i < butCount; i++){
   butterfly[i] = new THREE.Object3D();
   var overlap = Math.random();
@@ -796,12 +803,14 @@ for (var i = 0; i < butCount; i++){
     bufflock5.add(butterfly[i]);
   } else if (i < 10){
     bufflock6.add(butterfly[i]);
+  } else if (i < 19){
+    bufflock2.add(butterfly[i]);
   } else {
     bufflock.add(butterfly[i]);
   }
 }
-bufflock.scale.set(.001,.001,.001);
 everything.add(bufflock);
+everything.add(bufflock2);
 everything.add(bufflock5);
 everything.add(bufflock6);
 
@@ -868,14 +877,17 @@ for (var i = 0; i < flowerNumber; i++){
     flowerPatch.add(flower[i]);
   };
 };
-// flower[0].position.set(island5.position.x, island5.position.y, island5.position.z);//floating off main 1
-// flower[1].position.set(island6.position.x, island6.position.y, island6.position.z);//floating off main 2
-flower[2].position.set(5,0,-15);// on main
+flower[0].position.set(island7.position.x + 16, island7.position.y, island7.position.z - 1);//flowerpatch island
+flower[1].position.set(4,0.1,-12);//on main, near
+flower[2].scale.set(6,4,6);
+flower[2].position.set(7,0.1,-18);// on main, far
 everything.add(flower[0]);
 everything.add(flower[1]);
 everything.add(flower[2]);
 flowerPatch.position.set(island7.position.x,.1,island7.position.z - 2);
 everything.add(flowerPatch);
+bufflock2.position.set(flowerPatch.position.x + 10, flowerPatch.position.y, flowerPatch.position.z);
+
 
 //big plant tree
 var petal = [];
@@ -967,7 +979,7 @@ for (var i = 0; i < petal3Number; i++){
 };
 bufflower.scale.set(20,20,20);
 bufflower.position.set(-4,0,-17);
-bufflock.position.set(-4,0,-17);
+bufflock.position.set(bufflower.position.x + 5,bufflower.position.y,bufflower.position.z-150);
 everything.add(bufflower);
 
 //lower floating subisland bloomflower
@@ -999,7 +1011,7 @@ for (var i = 0; i < petal5Number; i++){
 };
 bufflower5.scale.set(15,15,15);
 bufflower5.position.set(island5.position.x, island5.position.y, island5.position.z);
-bufflock5.position.set(island5.position.x, island5.position.y, island5.position.z + 100);
+bufflock5.position.set(island5.position.x, island5.position.y, island5.position.z - 150);
 everything.add(bufflower5);
 
 //higher floating subisland bloomflower 
@@ -1031,7 +1043,7 @@ for (var i = 0; i < petal6Number; i++){
 };
 bufflower6.scale.set(10,10,10);
 bufflower6.position.set(island6.position.x, island6.position.y, island6.position.z);
-bufflock6.position.set(island6.position.x, island6.position.y, island6.position.z + 100);
+bufflock6.position.set(island6.position.x, island6.position.y, island6.position.z - 150);
 everything.add(bufflower6);
 
 
@@ -1040,7 +1052,7 @@ everything.scale.set(c,c,c);
 everything.position.y = -0.1;
 scene.add(everything);
 
-var i0t = 0;
+var i0t = 0; //island timers
 var i1t = 0;
 var i2t = 0;
 var i3t = 0;
@@ -1049,6 +1061,10 @@ var i5t = 0;
 var i6t = 0;
 var i7t = 0;
 var i8t = 0;
+
+var b5 = 0; //butterfly timers
+var b6 = 0;
+var b0 = 0;
 
 
 var relative1 = 0;
@@ -1175,6 +1191,7 @@ function animate() {
     p1 += (0.002*crouchHeight)/camera.position.y;
     move = 35 + (35 * Math.sin(p1));
     island1.position.x = move;
+    go1.play();
     // everything.position.x = -(move + move2);
   };
 
@@ -1202,6 +1219,8 @@ function animate() {
     island7.position.z = move7;
     island7.position.x = move7x;
     flowerPatch.position.set(island7.position.x,.1,island7.position.z - 2);
+    bufflock2.position.set(flowerPatch.position.x + 10, flowerPatch.position.y, flowerPatch.position.z);
+    flower[0].position.set(island7.position.x + 16, island7.position.y, island7.position.z - 1);
   };
 
   //glowbird island's circle
@@ -1221,10 +1240,12 @@ function animate() {
 
   //bird flapping
   for (var i = 0; i < birdNumber; i++){
-    var flappy = Math.sin(t/(5-(2*birdseed[i])));
-    bird[i].geometry.vertices[0].set(1,flappy,0);
-    bird[i].geometry.vertices[1].set(-1,flappy,0);
+    var flappy = Math.sin(t/(7-(2*birdseed[i])));
+    var flappy2 = Math.sin(t/(8-(3*birdseed[i])));
+    bird[i].geometry.vertices[0].set(2,flappy+flappy2,0);
+    bird[i].geometry.vertices[1].set(-2,flappy+flappy2,0);
     bird[i].geometry.verticesNeedUpdate = true;
+    bird[i].lookAt(camera.position);
     bird[i].position.x = 57*birdseed[i] + 20 * Math.sin((t+200*birdseed[i])/57) + 5*Math.sin(t*birdseed[i]/51) + 8*Math.sin(t*birdseed[i]/67) + 10*birdseed[i]*Math.sin(t*birdseed[i]/79);
     bird[i].position.z = 20 * Math.cos((t+200*birdseed[i])/57) + 7*Math.sin(t*birdseed[i]/51) + 6*Math.sin(t*birdseed[i]/67) + 11*birdseed[i]*Math.cos(t*birdseed[i]/73);
     bird[i].position.y = 25 + 5*Math.sin((t+333*birdseed[i])/(39 - 20000*(birdseed[i]/2432)));
@@ -1273,11 +1294,8 @@ function animate() {
 
   //main island blooming flower
   var relativeFlower = new THREE.Vector2(bufflower.position.x*c + everything.position.x, bufflower.position.z*c + everything.position.z); 
-  if ( pos.distanceTo(relativeFlower) < 5*c && (g3 < 2*pi) ){
+  if ( pos.distanceTo(relativeFlower) < 8*c && (g3 < 2*pi) ){
     g3 += .002;
-    var scaley = (g3-pi)/pi;
-    bufflock.scale.set(scaley,scaley,scaley);
-    bufflock.position.y = 5 - 5*scaley;
     for (var i = 0; i < petal3Number; i++){
       petal3[i].geometry.vertices[0].set(Math.cos(g3)/2 + 0.51, 2*bloom3 - 6*Math.cos(g3)/10, 0);
       petal3[i].geometry.vertices[1].set(-Math.cos(g3)/2 - 0.51, 2*bloom3 - 6*Math.cos(g3)/10, 0);
@@ -1291,7 +1309,7 @@ function animate() {
 
     //lower sub island blooming flower
   var relativeFlower5 = new THREE.Vector2(bufflower5.position.x*c + everything.position.x, bufflower5.position.z*c + everything.position.z); 
-  if ( pos.distanceTo(relativeFlower5) < 5*c && (g5 < 2*pi) ){
+  if ( pos.distanceTo(relativeFlower5) < 8*c && (g5 < 2*pi) ){
     g5 += .002;
     for (var i = 0; i < petal5Number; i++){ 
       petal5[i].geometry.vertices[0].set(Math.cos(g5)/2 + 0.51, 2*bloom5 - 6*Math.cos(g5)/10, 0);
@@ -1305,7 +1323,7 @@ function animate() {
   };
   //upper sub island blooming flower
   var relativeFlower6 = new THREE.Vector2(bufflower6.position.x*c + everything.position.x, bufflower6.position.z*c + everything.position.z); 
-  if ( pos.distanceTo(relativeFlower6) < 5*c && (g6 < 2*pi) ){
+  if ( pos.distanceTo(relativeFlower6) < 8*c && (g6 < 2*pi) ){
     g6 += .002;
     for (var i = 0; i < petal6Number; i++){ 
       petal6[i].geometry.vertices[0].set(Math.cos(g6)/2 + 0.51, 2*bloom6 - 6*Math.cos(g6)/10, 0);
@@ -1317,11 +1335,17 @@ function animate() {
       petal6[i].geometry.verticesNeedUpdate = true;
     };
   };
-  if (g6 > 3*pi/2){
-    bufflock6.position.set(island6.position.x, island6.position.y, island6.position.z + 100/g6);
+  if ((g6 > 3*pi/2) && ((-150 + b6) < bufflower6.position.z)){
+    b6 += 0.4;
+    bufflock6.position.set(bufflower6.position.x, bufflower6.position.y, -150 + b6);
   }
-  if (g5 > 3*pi/2){
-    bufflock5.position.set(island5.position.x, island5.position.y, island5.position.z + 100/g5);
+  if ((g5 > 3*pi/2) && ((-150 + b5) < bufflower5.position.z)){
+    b5 += 0.4;
+    bufflock5.position.set(bufflower5.position.x, bufflower5.position.y, -150 + b5);
+  }
+  if ((g3 > 3*pi/2) && ((-150 + b0) < bufflower.position.z)){
+    b0 += 0.4;
+    bufflock.position.set(bufflower.position.x + 5, bufflower.position.y, -150 + b0);
   }
 
   //rolling clouds
@@ -1329,6 +1353,9 @@ function animate() {
   plane2.geometry.vertices[i].z = Math.sin((plane.geometry.vertices[i].y + t/89)/3) + 2*Math.sin((plane.geometry.vertices[i].y + t/99)/17) + 1.2*Math.sin((plane.geometry.vertices[i].x + t/123)/2) + 1.1*Math.cos((plane.geometry.vertices[i].y + t/197)/3.6) + 1.5*Math.cos((plane.geometry.vertices[i].x + t/111)/3);
   };
   plane2.geometry.verticesNeedUpdate=true;
+
+  //L island music
+  music1.volume = Math.min(1, 2/(pos.distanceTo(relative2)*pos.distanceTo(relative2)*pos.distanceTo(relative2)));
 
   //Update VR headset position and apply to camera.
   controls.update();
