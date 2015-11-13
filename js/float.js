@@ -1218,6 +1218,7 @@ function animate() {
     move = 35 + (35 * Math.sin(p1));
     island1.position.x = move;
     go1.play();
+    i1grass.children[0].children[0].material.color.setRGB(0.4-i1t,i1t + 2 + -Math.cos(t/20),0.4-i1t);
     if (goTog1 == 0){
       start.play();
       goTog1 = 1;
@@ -1242,6 +1243,7 @@ function animate() {
     move2 = (30 * Math.sin(p2));
     island3.position.x = move2;
     go3.play();
+    i3grass.children[0].children[0].material.color.setRGB(0.4-i3t,i3t + 0.5 + Math.cos(t/25)/2,0.4-i3t);
     if (goTog3 == 0){
       start.play();
       goTog3 = 1;
@@ -1266,6 +1268,7 @@ function animate() {
     move4 = -(40 * Math.cos(p4)) + 40 + 15;
     island4.position.z = move4;
     go4.play();
+    i4grass.children[0].children[0].material.color.setRGB(0.4-i4t,i4t + 2 + -Math.cos(t/20),0.4-i4t);
     if (goTog4 == 0){
       start.play();
       goTog4 = 1;
@@ -1295,6 +1298,7 @@ function animate() {
     bufflock2.position.set(flowerPatch.position.x + 10, flowerPatch.position.y, flowerPatch.position.z);
     flower[0].position.set(island7.position.x + 16, island7.position.y, island7.position.z - 1);
     go7.play();
+    i7grass.children[0].children[0].material.color.setRGB(0.4-i7t,i7t + 0.5 + Math.cos(t/30)/4,0.4-i7t);
     if (goTog7 == 0){
       start.play();
       goTog7 = 1;
@@ -1480,8 +1484,8 @@ function animate() {
   //L island music
   music1.volume = Math.min(1, 2/(pos.distanceTo(relative2)*pos.distanceTo(relative2)*pos.distanceTo(relative2)));
 
-  relativeFlock = new THREE.Vector2(c*flock.position.x + everything.position.x, c*flock.position.z + everything.position.z);
-  birdNoise.volume = Math.min(1, 10/(10*(pos.distanceTo(relativeFlock))));
+  relativeFlock = new THREE.Vector2(c*flock.position.x + everything.position.x + 30*c, c*flock.position.z + everything.position.z);
+  birdNoise.volume = Math.min(0.5, 5/(10*(pos.distanceTo(relativeFlock))));
 
   //Update VR headset position and apply to camera.
   controls.update();
