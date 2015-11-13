@@ -26,7 +26,11 @@ renderer.setClearColor( 0xaaddff );
 scene.fog = new THREE.FogExp2( 0xaaddff, .02/c);
 
 
-var music1 = document.querySelector('#child3');
+var piano1 = document.querySelector('#piano1');
+var piano2 = document.querySelector('#piano2');
+var piano3 = document.querySelector('#piano3');
+var piano4 = document.querySelector('#piano4');
+var pianoEnd = document.querySelector('#pianoEnd');
 var intro = document.querySelector('#intro');
 var outro = document.querySelector('#outro');
 var start = document.querySelector('#start');
@@ -1086,7 +1090,7 @@ var b5 = 0; //butterfly timers
 var b6 = 0;
 var b0 = 0;
 
-
+var relative0 = 0;
 var relative1 = 0;
 var relative2 = 0;
 var relative3 = 0;
@@ -1105,6 +1109,9 @@ var goTog3 = 0;
 var goTog4 = 0;
 var goTog7 = 0;
 var goTog8 = 0;
+
+var win = 0;
+
 /*
 Request animation frame loop function
 */
@@ -1170,7 +1177,8 @@ function animate() {
     };
   };
 
-  if (pos.distanceTo(island0.position) < 15*c){
+  relative0 = new THREE.Vector2(island0.position.x*c + everything.position.x, island0.position.z*c + everything.position.z);
+  if (pos.distanceTo(relative0) < 15*c){
     i0t = Math.min(i0t + 0.002, 1);
     if (i0t > .2){
       i0grass.children[0].children[0].material.color.setRGB(0.4-i0t,i0t,0.4-i0t); //this will break everything if objs aren't loaded yet
@@ -1327,6 +1335,7 @@ function animate() {
     glowbird.position.z = move8z + 10*Math.sin(p8);
     glowbird.position.x = move8x + 15*Math.cos(p8);
     go8.play();
+    win = 1;
     if (goTog8 == 0){
       start.play();
       goTog8 = 1;
@@ -1481,11 +1490,27 @@ function animate() {
   };
   plane2.geometry.verticesNeedUpdate=true;
 
-  //L island music
-  music1.volume = Math.min(1, 2/(pos.distanceTo(relative2)*pos.distanceTo(relative2)*pos.distanceTo(relative2)));
+  //island music
+  if (win == 0){
+    pianoEnd.pause();
+    piano1.volume = Math.min(0.8, 3/(pos.distanceTo(relative0)*pos.distanceTo(relative0)*pos.distanceTo(relative0)));
+    piano2.volume = Math.min(0.8, 2/(pos.distanceTo(relative2)*pos.distanceTo(relative2)*pos.distanceTo(relative2)));
+    piano3.volume = Math.min(0.8, 2/((pos.distanceTo(relative8)*pos.distanceTo(relative8)*pos.distanceTo(relative8))));
+    piano4.volume = Math.min(0.8, 2/(pos.distanceTo(relative7)*pos.distanceTo(relative7)*pos.distanceTo(relative7)));
+  } else {
+    piano1.pause();
+    piano2.pause();
+    piano3.pause();
+    piano4.pause();
+    pianoEnd.play();
+
+    go8.volume = 0;
+    close8.volume = 0;
+  };
+
 
   relativeFlock = new THREE.Vector2(c*flock.position.x + everything.position.x + 30*c, c*flock.position.z + everything.position.z);
-  birdNoise.volume = Math.min(0.5, 5/(10*(pos.distanceTo(relativeFlock))));
+  birdNoise.volume = Math.min(0.5, 2/(20*(pos.distanceTo(relativeFlock))));
 
   //Update VR headset position and apply to camera.
   controls.update();
