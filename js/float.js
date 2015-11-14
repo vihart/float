@@ -48,9 +48,11 @@ var go8 = document.querySelector('#go8');;
 var bloomHigh = document.querySelector('#bloomHigh');
 var bloomMed = document.querySelector('#bloomMed');
 var bloomLow = document.querySelector('#bloomLow');
+var bloomLow7 = document.querySelector('#bloomLow7');
 var bloomSigh = document.querySelector('#bloomSigh');
 var bloomSigh2 = document.querySelector('#bloomSigh2');
 var bloomSigh3 = document.querySelector('#bloomSigh3');
+var bloomSigh7 = document.querySelector('#bloomSigh7');
 var bloomSighTree = document.querySelector('#bloomSighTree');
 var birdNoise = document.querySelector('#bird');
 
@@ -897,7 +899,7 @@ for (var i = 0; i < flowerNumber; i++){
 
   flower[i].scale.set(fwidth[i],fheight[i],fwidth[i]);
   if (i > 2){
-    flower[i].position.set(14*Math.random(),0,(1.5*i)-5.5);
+    // flower[i].position.set(14*Math.random(),0,(1.5*i)-5.5);
     flowerPatch.add(flower[i]);
   };
 };
@@ -905,6 +907,13 @@ flower[0].position.set(island7.position.x + 16, island7.position.y, island7.posi
 flower[1].position.set(4,0.1,-12);//on main, near
 flower[2].scale.set(6,4,6);
 flower[2].position.set(7,0.1,-18);// on main, far
+
+flower[3].position.set(5, 0.1, 5);
+flower[4].position.set(0.5, 0.1, -2);
+flower[5].position.set(1, 0.1, 4);
+flower[6].position.set(7, 0.1, -4);
+flower[7].position.set(3, 0.1, -1);
+
 everything.add(flower[0]);
 everything.add(flower[1]);
 everything.add(flower[2]);
@@ -1070,6 +1079,38 @@ bufflower6.position.set(island6.position.x, island6.position.y, island6.position
 bufflock6.position.set(island6.position.x, island6.position.y, island6.position.z - 150);
 everything.add(bufflower6);
 
+//butterflilsand bloomflowre
+//lower floating subisland bloomflower
+var g7 = pi;
+var petal7 = [];
+var petal7Number = 7;
+var bufflower7 = new THREE.Object3D();
+var bloom7 = .8;
+
+for (var i = 0; i < petal7Number; i++){
+  petal7[i] = new THREE.Mesh(
+      new THREE.OctahedronGeometry(1),
+      new THREE.MeshLambertMaterial()
+      );
+
+  petal7[i].geometry.vertices[0].set(Math.cos(g7)/2 + 0.51, 2*bloom7 - 6*Math.cos(g7)/10, 0);
+  petal7[i].geometry.vertices[1].set(-Math.cos(g7)/2 - 0.51, 2*bloom7 - 6*Math.cos(g7)/10, 0);
+  petal7[i].geometry.vertices[2].set(0,-Math.cos(g7)/3 + 0.2,Math.cos(g7)/8 + 0.5);
+  petal7[i].geometry.vertices[3].set(0,-0.3,- 0.1);
+  petal7[i].geometry.vertices[4].set(0,-0.3,0.1);
+  petal7[i].geometry.vertices[5].set(0,-Math.cos(g7)/3 + 0.2,-Math.cos(g7)/8 - 0.5);
+
+  var petal7Scale = (petal7Number - i + 1) / 50;
+  petal7[i].scale.set(petal7Scale,petal7Scale,petal7Scale);
+  petal7[i].material.color.setRGB(0.2 + (i/petal7Number), 0 + (i/petal7Number), 0.8 - (i/petal7Number));
+  petal7[i].position.y = i/400;
+  petal7[i].rotation.y = i*pi*phi;
+  bufflower7.add(petal7[i]);
+};
+bufflower7.scale.set(15,15,15);
+bufflower7.position.set(island7.position.x + 11, island7.position.y, island7.position.z);
+// bufflock7.position.set(island5.position.x, island5.position.y, island5.position.z - 150);
+everything.add(bufflower7);
 
 
 everything.scale.set(c,c,c);
@@ -1089,6 +1130,7 @@ var i8t = 0;
 var b5 = 0; //butterfly timers
 var b6 = 0;
 var b0 = 0;
+var b7 = 0;
 
 var relative0 = 0;
 var relative1 = 0;
@@ -1303,6 +1345,7 @@ function animate() {
     island7.position.z = move7;
     island7.position.x = move7x;
     flowerPatch.position.set(island7.position.x,.1,island7.position.z - 2);
+    bufflower7.position.set(island7.position.x + 11, island7.position.y, island7.position.z);
     bufflock2.position.set(flowerPatch.position.x + 10, flowerPatch.position.y, flowerPatch.position.z);
     flower[0].position.set(island7.position.x + 16, island7.position.y, island7.position.z - 1);
     go7.play();
@@ -1347,7 +1390,7 @@ function animate() {
       goTog8 = 0;
     }
   }
-  if (pos.distanceTo(relative8) < 8*c){
+  if ((pos.distanceTo(relative8) < 8*c) && (win == 0)){
     close8.play();
     close8.volume = Math.min(1 , 2/(15*pos.distanceTo(relative8)));
   }else{
@@ -1468,6 +1511,23 @@ function animate() {
   }else{
     bloomSigh3.pause();
   };
+  var relativeFlower7 = new THREE.Vector2(bufflower7.position.x*c + everything.position.x, bufflower7.position.z*c + everything.position.z); 
+  if ( pos.distanceTo(relativeFlower7) < 8*c && (g7 < 2*pi) ){
+    g7 += .003;
+    bloomSigh7.play();
+    for (var i = 0; i < petal7Number; i++){ 
+      petal7[i].geometry.vertices[0].set(Math.cos(g7)/2 + 0.51, 2*bloom7 - 6*Math.cos(g7)/10, 0);
+      petal7[i].geometry.vertices[1].set(-Math.cos(g7)/2 - 0.51, 2*bloom7 - 6*Math.cos(g7)/10, 0);
+      petal7[i].geometry.vertices[2].set(0,-Math.cos(g7)/3 + 0.2,Math.cos(g7)/8 + 0.5);
+      petal7[i].geometry.vertices[3].set(0,-0.3,- 0.1);
+      petal7[i].geometry.vertices[4].set(0,-0.3,0.1);
+      petal7[i].geometry.vertices[5].set(0,-Math.cos(g7)/3 + 0.2,-Math.cos(g7)/8 - 0.5);
+      petal7[i].geometry.verticesNeedUpdate = true;
+    };
+  }else{
+    bloomSigh7.pause();
+  };
+
   if ((g6 > 4.5) && ((-150 + b6) < bufflower6.position.z)){
     b6 += 0.4;
     bloomHigh.play();
@@ -1483,7 +1543,11 @@ function animate() {
     bloomLow.play();
     bufflock.position.set(bufflower.position.x + 5, bufflower.position.y, -150 + b0);
   }
-
+  if ((g7 > 4.5) && ((-150 + b7) < bufflower7.position.z)){
+    b7 += 0.4;
+    bloomLow7.play();
+    // bufflock7.position.set(bufflower7.position.x + 5, bufflower7.position.y, -150 + b7);
+  }
   //rolling clouds
   for (var i = 0; i < plane2.geometry.vertices.length; i++){
   plane2.geometry.vertices[i].z = Math.sin((plane.geometry.vertices[i].y + t/89)/3) + 2*Math.sin((plane.geometry.vertices[i].y + t/99)/17) + 1.2*Math.sin((plane.geometry.vertices[i].x + t/123)/2) + 1.1*Math.cos((plane.geometry.vertices[i].y + t/197)/3.6) + 1.5*Math.cos((plane.geometry.vertices[i].x + t/111)/3);
@@ -1505,7 +1569,6 @@ function animate() {
     pianoEnd.play();
 
     go8.volume = 0;
-    close8.volume = 0;
   };
 
 
