@@ -1371,8 +1371,8 @@ function animate() {
   //glowbird island's circle
   if ((pos.distanceTo(relative8) < 8*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p8 += (0.002*crouchHeight)/camera.position.y;
-    move8z = 70*Math.sin(p8/6);
-    move8x = 125*Math.cos(p8/6)+25;
+    move8z = 70*Math.sin(p8/3);
+    move8x = 125*Math.cos(p8/3)+25;
     island8.position.z = move8z;
     island8.position.x = move8x;
     glowbird.position.z = move8z + 10*Math.sin(p8);
@@ -1546,7 +1546,7 @@ function animate() {
     bloomLow.play();
     bufflock.position.set(bufflower.position.x + 5, bufflower.position.y, -150 + b0);
   }
-  if ((g7 > 4.5) && ((-150 + b7) < bufflower7.position.z)){
+  if ((g7 > 4.5) && (b7 < 150)){
     b7 += 0.4;
     bloomLow7.play();
     // bufflock7.position.set(bufflower7.position.x + 5, bufflower7.position.y, -150 + b7);
