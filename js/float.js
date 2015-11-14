@@ -1378,6 +1378,9 @@ function animate() {
     glowbird.position.z = move8z + 10*Math.sin(p8);
     glowbird.position.x = move8x + 15*Math.cos(p8);
     go8.play();
+    if (win == 0){
+      outro.play();
+    }
     win = 1;
     if (goTog8 == 0){
       start.play();
@@ -1567,7 +1570,6 @@ function animate() {
     piano3.pause();
     piano4.pause();
     pianoEnd.play();
-
     go8.volume = 0;
   };
 
@@ -1606,6 +1608,8 @@ function onkey(event) {
     controls.resetSensor(); //zero rotation
   } else if (event.keyCode == 70 || event.keyCode == 13) { //f or enter
     effect.setFullScreen(true) //fullscreen
+  } else if (event.keyCode == 32){
+    intro.play();
   }
 };
 window.addEventListener("keydown", onkey, true);
