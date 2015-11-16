@@ -7,7 +7,7 @@
 THREE.VRControls = function ( camera, speed, done ) {
 	this.phoneVR = new PhoneVR();
 
-	this.speed = speed || 1; // 3 is just a good default speed multiplier
+	this.speed = speed || 3; // 3 is just a good default speed multiplier
 
 	//---game controller stuff---
 	this.haveEvents = 'ongamepadconnected' in window;
