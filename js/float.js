@@ -25,6 +25,8 @@ renderer.setClearColor( 0xaaddff );
 
 scene.fog = new THREE.FogExp2( 0xaaddff, .02/c);
 
+camera.position.y = 25*c;
+
 
 var piano1 = document.querySelector('#piano1');
 var piano2 = document.querySelector('#piano2');
