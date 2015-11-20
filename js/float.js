@@ -1265,7 +1265,7 @@ function animate() {
   };
 
   //main island's moving platform
-  if ((pos.distanceTo(relative1) < 4*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
+  if ((pos.distanceTo(relative1) < 5.5*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p1 += (0.002*crouchHeight)/camera.position.y;
     move = 35 + (35 * Math.sin(p1));
     island1.position.x = move;
@@ -1315,7 +1315,7 @@ function animate() {
   };
 
   //main island's secret moving platform
-  if ((pos.distanceTo(relative4) < 4*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
+  if ((pos.distanceTo(relative4) < 5.5*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
     p4 += (0.002*crouchHeight)/camera.position.y;
     move4 = -(40 * Math.cos(p4)) + 40 + 15;
     island4.position.z = move4;
@@ -1610,8 +1610,11 @@ function onkey(event) {
     controls.resetSensor(); //zero rotation
   } else if (event.keyCode == 70 || event.keyCode == 13) { //f or enter
     effect.setFullScreen(true) //fullscreen
-  } else if (event.keyCode == 32){
+  } else if (event.keyCode == 32){ //space
     intro.play();
+  } else if (event.keyCode == 80){ //p
+    intro.pause();
+    intro.currentTime = 0;
   }
 };
 window.addEventListener("keydown", onkey, true);
