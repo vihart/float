@@ -212,7 +212,7 @@ THREE.VREffect = function ( renderer, done ) {
 			height: renderer.domElement.height
 		};
 
-		vrHMD.requestPresent({source: canvas});
+		vrHMD.requestPresent([{source: canvas}]);
 
 		// Hardcoded Rift display size
 		renderer.setSize( 1280, 800, false );
