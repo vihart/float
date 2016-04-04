@@ -179,6 +179,7 @@ THREE.VREffect = function ( renderer, done ) {
 	this.setFullScreen = function( enable ) {
 		var renderer = this._renderer;
 		var vrHMD = this._vrHMD;
+
 		var canvasOriginalSize = this._canvasOriginalSize;
 
 		// If state doesn't change we do nothing
@@ -210,6 +211,9 @@ THREE.VREffect = function ( renderer, done ) {
 			width: renderer.domElement.width,
 			height: renderer.domElement.height
 		};
+
+		vrHMD.requestPresent({source: canvas}));
+
 		// Hardcoded Rift display size
 		renderer.setSize( 1280, 800, false );
 		this.startFullscreen();
