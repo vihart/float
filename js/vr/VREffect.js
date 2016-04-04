@@ -58,7 +58,7 @@ THREE.VREffect = function ( renderer, done ) {
 			var vrHMD;
 			var error;
 			for ( var i = 0; i < devices.length; ++i ) {
-				if ( devices[i] instanceof HMDVRDevice ) {
+				if ( devices[i] instanceof vrDisplay ) {
 					vrHMD = devices[i];
 					self._vrHMD = vrHMD;
 					var parametersLeft = vrHMD.getEyeParameters( "left" );
