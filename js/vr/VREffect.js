@@ -114,6 +114,9 @@ THREE.VREffect = function ( renderer, done ) {
 		// VR render mode if HMD is available
 		if ( vrHMD ) {
 			this.renderStereo.apply( this, arguments );
+			if (vrHMD.submitFrame !== undefined) {
+				vrHMD.submitFrame();
+			}
 			return;
 		}
 
