@@ -40,17 +40,45 @@ THREE.VREffect = function ( renderer, done ) {
 		self.rightEyeFOV = { upDegrees: 53.04646464878503, rightDegrees: 46.63209579904155, downDegrees: 53.04646464878503, leftDegrees: 47.52769258067174 };
 
 
-		if ( !navigator.mozGetVRDevices && !navigator.getVRDevices ) {
+		if (!navigator.getVRDisplay && !navigator.mozGetVRDevices && !navigator.getVRDevices) {
 			if ( done ) {
 				done("Your browser is not VR Ready");
 			}
 			return;
 		}
-		if ( navigator.getVRDevices ) {
+		if (navigator.getVRDisplay) {
+			navigator.getVRDisplay().then( gotVRDisplay );
+		}else if ( navigator.getVRDevices ) {
 			navigator.getVRDevices().then( gotVRDevices );
 		} else {
 			navigator.mozGetVRDevices( gotVRDevices );
 		}
+
+		function gotVRDisplay( devices ) {
+			var vrHMD;
+			var error;
+			for ( var i = 0; i < devices.length; ++i ) {
+				if ( devices[i] instanceof HMDVRDevice ) {
+					vrHMD = devices[i];
+					self._vrHMD = vrHMD;
+					var parametersLeft = vrHMD.getEyeParameters( "left" );
+					var parametersRight = vrHMD.getEyeParameters( "right" );
+					self.leftEyeTranslation = parametersLeft.eyeTranslation;
+					self.rightEyeTranslation = parametersRight.eyeTranslation;
+					self.leftEyeFOV = parametersLeft.recommendedFieldOfView;
+					self.rightEyeFOV = parametersRight.recommendedFieldOfView;
+					break; // We keep the first we encounter
+				}
+			}
+
+			if ( done ) {
+				if ( !vrHMD ) {
+				 error = 'HMD not available';
+				}
+				done( error );
+			}
+		}
+
 		function gotVRDevices( devices ) {
 			var vrHMD;
 			var error;
