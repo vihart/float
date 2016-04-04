@@ -269,16 +269,22 @@ THREE.VRControls = function ( camera, speed, done ) {
 	this.getVRState = function() {
 		var vrInput = this._vrInput;
 		var orientation;
+		var position;
 		var vrState;
 
 		if ( vrInput ) {
 			if (vrInput.getState !== undefined) {
 				orientation	= vrInput.getState().orientation;
+				orientation = [orientation.x, orientation.y, orientation.z, orientation.w];
+				position = vrInput.getState().position;
+				position = [position.x, position.y, position.z];
 			} else {
 				orientation	= vrInput.getPose().orientation;
+				position = vrInput.getPose().position;
 			}
 		} else if (this.phoneVR.rotationQuat()) {
 			orientation = this.phoneVR.rotationQuat();
+			orientation = [orientation.x, orientation.y, orientation.z, orientation.w];
 		} else {
 			return null;
 		}
@@ -289,13 +295,19 @@ THREE.VRControls = function ( camera, speed, done ) {
 		vrState = {
 			hmd : {
 				rotation : [
-					orientation.x,
-					orientation.y,
-					orientation.z,
-					orientation.w
+					orientation[0],
+					orientation[1],
+					orientation[2],
+					orientation[3]
+				],
+				position : [
+					position[0],
+					position[1],
+					position[2]
 				]
 			}
 		};
+
 		return vrState;
 	};
 
