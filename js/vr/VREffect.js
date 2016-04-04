@@ -40,14 +40,14 @@ THREE.VREffect = function ( renderer, done ) {
 		self.rightEyeFOV = { upDegrees: 53.04646464878503, rightDegrees: 46.63209579904155, downDegrees: 53.04646464878503, leftDegrees: 47.52769258067174 };
 
 
-		if (!navigator.getVRDisplay && !navigator.mozGetVRDevices && !navigator.getVRDevices) {
+		if (!navigator.getVRDisplays && !navigator.mozGetVRDevices && !navigator.getVRDevices) {
 			if ( done ) {
 				done("Your browser is not VR Ready");
 			}
 			return;
 		}
-		if (navigator.getVRDisplay) {
-			navigator.getVRDisplay().then( gotVRDisplay );
+		if (navigator.getVRDisplays) {
+			navigator.getVRDisplays().then( gotVRDisplay );
 		}else if ( navigator.getVRDevices ) {
 			navigator.getVRDevices().then( gotVRDevices );
 		} else {
