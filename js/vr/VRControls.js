@@ -222,9 +222,9 @@ THREE.VRControls = function ( camera, speed, done ) {
 
 			// Applies head rotation from sensors data.
 			var totalRotation = new THREE.Quaternion();
-			var state = vrInput.getState();
-      if (state.orientation !== null) {
-					var vrStateRotation = new THREE.Quaternion(state.orientation.x, state.orientation.y, state.orientation.z, state.orientation.w);
+			var state = this.getVRState();
+      if (state !== null) {
+					var vrStateRotation = new THREE.Quaternion(vrState.hmd.rotation[0], vrState.hmd.rotation[1], vrState.hmd.rotation[2], vrState.hmd.rotation[3]);
 	        totalRotation.multiplyQuaternions(manualRotation, vrStateRotation);
       } else {
         	totalRotation = manualRotation;
@@ -272,7 +272,11 @@ THREE.VRControls = function ( camera, speed, done ) {
 		var vrState;
 
 		if ( vrInput ) {
-			orientation	= vrInput.getState().orientation;
+			if (vrInput.getState !== undefined) {
+				orientation	= vrInput.getState().orientation;
+			} else {
+				orientation	= vrInput.getPose().orientation;
+			}
 		} else if (this.phoneVR.rotationQuat()) {
 			orientation = this.phoneVR.rotationQuat();
 		} else {
