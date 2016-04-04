@@ -212,8 +212,6 @@ THREE.VREffect = function ( renderer, done ) {
 			height: renderer.domElement.height
 		};
 
-		vrHMD.requestPresent([{source: canvas}]);
-
 		// Hardcoded Rift display size
 		renderer.setSize( 1280, 800, false );
 		this.startFullscreen();
@@ -226,6 +224,7 @@ THREE.VREffect = function ( renderer, done ) {
 		var canvas = renderer.domElement;
 		var fullScreenChange =
 			canvas.mozRequestFullScreen? 'mozfullscreenchange' : 'webkitfullscreenchange';
+		vrHMD.requestPresent([{source: canvas}]);
 
 		document.addEventListener( fullScreenChange, onFullScreenChanged, false );
 		function onFullScreenChanged() {
