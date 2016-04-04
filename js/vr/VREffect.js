@@ -148,8 +148,14 @@ THREE.VREffect = function ( renderer, done ) {
 		camera.matrixWorld.decompose( cameraLeft.position, cameraLeft.quaternion, cameraLeft.scale );
 		camera.matrixWorld.decompose( cameraRight.position, cameraRight.quaternion, cameraRight.scale );
 
-		cameraLeft.translateX( leftEyeTranslation.x );
-		cameraRight.translateX( rightEyeTranslation.x );
+		if (leftEyeTranslation.x !== undefined) {
+			cameraLeft.translateX( leftEyeTranslation.x );
+			cameraRight.translateX( rightEyeTranslation.x );
+		} else {
+			cameraLeft.translateX( leftEyeTranslation[0] );
+			cameraRight.translateX( rightEyeTranslation[0] );
+		}
+
 
 		// render left eye
 		renderer.setViewport( 0, 0, eyeDivisionLine, rendererHeight );
