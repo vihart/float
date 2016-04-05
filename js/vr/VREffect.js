@@ -177,6 +177,8 @@ THREE.VREffect = function ( renderer, done ) {
 	};
 
 	this.setVRMode = function (enable) {
+		var vrHMD = this._vrHMD;
+		
 		if (enable) {
 			vrHMD.requestPresent([{source: canvas, leftBounds: [0.0, 0.0, 0.5, 1.0], rightBounds: [0.5, 0.0, 0.5, 1.0]}]);
 		} else {
