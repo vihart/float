@@ -122,7 +122,7 @@ var manager80 = new THREE.LoadingManager();
 var loader80 = new THREE.OBJLoader(manager80);
 loader80.load( fileName[3], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -136,7 +136,7 @@ var manager81 = new THREE.LoadingManager();
 var loader81 = new THREE.OBJLoader(manager81);
 loader81.load( fileName[4], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -150,7 +150,7 @@ var manager82 = new THREE.LoadingManager();
 var loader82 = new THREE.OBJLoader(manager82);
 loader82.load( fileName[5], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -175,7 +175,7 @@ var manager70 = new THREE.LoadingManager();
 var loader70 = new THREE.OBJLoader(manager70);
 loader70.load( fileName[3], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -189,7 +189,7 @@ var manager71 = new THREE.LoadingManager();
 var loader71 = new THREE.OBJLoader(manager71);
 loader71.load( fileName[4], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -203,7 +203,7 @@ var manager72 = new THREE.LoadingManager();
 var loader72 = new THREE.OBJLoader(manager72);
 loader72.load( fileName[5], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -228,7 +228,7 @@ var manager40 = new THREE.LoadingManager();
 var loader40 = new THREE.OBJLoader(manager40);
 loader40.load( fileName[3], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -242,7 +242,7 @@ var manager41 = new THREE.LoadingManager();
 var loader41 = new THREE.OBJLoader(manager41);
 loader41.load( fileName[4], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -256,7 +256,7 @@ var manager42 = new THREE.LoadingManager();
 var loader42 = new THREE.OBJLoader(manager42);
 loader42.load( fileName[5], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -279,7 +279,7 @@ var manager50 = new THREE.LoadingManager();
 var loader50 = new THREE.OBJLoader(manager50);
 loader50.load( fileName[3], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -293,7 +293,7 @@ var manager51 = new THREE.LoadingManager();
 var loader51 = new THREE.OBJLoader(manager51);
 loader51.load( fileName[4], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -307,7 +307,7 @@ var manager52 = new THREE.LoadingManager();
 var loader52 = new THREE.OBJLoader(manager52);
 loader52.load( fileName[5], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -332,7 +332,7 @@ var manager60 = new THREE.LoadingManager();
 var loader60 = new THREE.OBJLoader(manager60);
 loader60.load( fileName[3], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -346,7 +346,7 @@ var manager61 = new THREE.LoadingManager();
 var loader61 = new THREE.OBJLoader(manager61);
 loader61.load( fileName[4], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -360,7 +360,7 @@ var manager62 = new THREE.LoadingManager();
 var loader62 = new THREE.OBJLoader(manager62);
 loader62.load( fileName[5], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -389,7 +389,7 @@ var loader00 = new THREE.OBJLoader(manager00);
 
 loader00.load( fileName[0], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -405,7 +405,7 @@ var loader01 = new THREE.OBJLoader(manager01);
 
 loader01.load( fileName[1], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -422,7 +422,7 @@ var loader02 = new THREE.OBJLoader(manager02);
 
 loader02.load( fileName[2], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -447,7 +447,7 @@ var loader10 = new THREE.OBJLoader(manager10);
 
 loader10.load( fileName[3], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -463,7 +463,7 @@ var loader11 = new THREE.OBJLoader(manager11);
 
 loader11.load( fileName[4], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -480,7 +480,7 @@ var loader12 = new THREE.OBJLoader(manager12);
 
 loader12.load( fileName[5], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -505,7 +505,7 @@ var loader20 = new THREE.OBJLoader(manager20);
 
 loader20.load( fileName[6], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -522,7 +522,7 @@ var loader21 = new THREE.OBJLoader(manager21);
 
 loader21.load( fileName[7], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -539,7 +539,7 @@ var loader22 = new THREE.OBJLoader(manager22);
 
 loader22.load( fileName[8], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -563,7 +563,7 @@ var loader30 = new THREE.OBJLoader(manager30);
 
 loader30.load( fileName[9], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -580,7 +580,7 @@ var loader31 = new THREE.OBJLoader(manager31);
 
 loader31.load( fileName[10], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -597,7 +597,7 @@ var loader32 = new THREE.OBJLoader(manager32);
 
 loader32.load( fileName[11], function ( object ) {
 object.scale.set(1,1,1);
-object.position.set(0,0,0);    
+object.position.set(0,0,0);
 object.traverse(function (child) {
         if (child instanceof THREE.Mesh) {
             child.material = new THREE.MeshLambertMaterial({color:"rgb(20%, 20%, 20%)"});
@@ -616,7 +616,7 @@ island3.position.z = 17;
 island2.position.y = -8.5;
 island3.position.y = -8.5;
 
-//lights    
+//lights
 var light = new THREE.PointLight( 0xffffff, 1, 40*c);
 light.position.set( -10,25,-25);
 light.castShadow = true;
@@ -641,7 +641,7 @@ var move = 35 + (35 * Math.sin(p1));
 var move2 = (30 * Math.sin(p2));
 var move4 = -(40 * Math.cos(p4)) + 40 + 15;
 var move7 = -(39 * -Math.cos(p7)) + 39 + 10;
-var move7x = 43*Math.cos((move7-20)/53) - 10;  
+var move7x = 43*Math.cos((move7-20)/53) - 10;
 var move8z = 50*Math.sin(p8/100);
 var move8x = 125*Math.cos(p8/100)+25;
 
@@ -985,7 +985,7 @@ plant2.position.set(84,0,-19)
 everything.add(plant2);
 
 //blooming flowers
-//Big island 
+//Big island
 var g3 = pi;
 var petal3 = [];
 var petal3Number = 15;
@@ -1049,7 +1049,7 @@ bufflower5.position.set(island5.position.x, island5.position.y, island5.position
 bufflock5.position.set(island5.position.x, island5.position.y, island5.position.z - 150);
 everything.add(bufflower5);
 
-//higher floating subisland bloomflower 
+//higher floating subisland bloomflower
 var g6 = pi;
 var petal6 = [];
 var petal6Number = 20;
@@ -1465,7 +1465,7 @@ function animate() {
   };
 
   //main island blooming flower
-  var relativeFlower = new THREE.Vector2(bufflower.position.x*c + everything.position.x, bufflower.position.z*c + everything.position.z); 
+  var relativeFlower = new THREE.Vector2(bufflower.position.x*c + everything.position.x, bufflower.position.z*c + everything.position.z);
   if ( pos.distanceTo(relativeFlower) < 8*c && (g3 < 2*pi) ){
     g3 += .003;
     bloomSigh.play();
@@ -1483,11 +1483,11 @@ function animate() {
   };
 
     //lower sub island blooming flower
-  var relativeFlower5 = new THREE.Vector2(bufflower5.position.x*c + everything.position.x, bufflower5.position.z*c + everything.position.z); 
+  var relativeFlower5 = new THREE.Vector2(bufflower5.position.x*c + everything.position.x, bufflower5.position.z*c + everything.position.z);
   if ( pos.distanceTo(relativeFlower5) < 8*c && (g5 < 2*pi) ){
     g5 += .003;
     bloomSigh2.play();
-    for (var i = 0; i < petal5Number; i++){ 
+    for (var i = 0; i < petal5Number; i++){
       petal5[i].geometry.vertices[0].set(Math.cos(g5)/2 + 0.51, 2*bloom5 - 6*Math.cos(g5)/10, 0);
       petal5[i].geometry.vertices[1].set(-Math.cos(g5)/2 - 0.51, 2*bloom5 - 6*Math.cos(g5)/10, 0);
       petal5[i].geometry.vertices[2].set(0,-Math.cos(g5)/3 + 0.2,Math.cos(g5)/8 + 0.5);
@@ -1500,11 +1500,11 @@ function animate() {
     bloomSigh2.pause();
   };
   //upper sub island blooming flower
-  var relativeFlower6 = new THREE.Vector2(bufflower6.position.x*c + everything.position.x, bufflower6.position.z*c + everything.position.z); 
+  var relativeFlower6 = new THREE.Vector2(bufflower6.position.x*c + everything.position.x, bufflower6.position.z*c + everything.position.z);
   if ( pos.distanceTo(relativeFlower6) < 8*c && (g6 < 2*pi) ){
     g6 += .003;
     bloomSigh3.play();
-    for (var i = 0; i < petal6Number; i++){ 
+    for (var i = 0; i < petal6Number; i++){
       petal6[i].geometry.vertices[0].set(Math.cos(g6)/2 + 0.51, 2*bloom6 - 6*Math.cos(g6)/10, 0);
       petal6[i].geometry.vertices[1].set(-Math.cos(g6)/2 - 0.51, 2*bloom6 - 6*Math.cos(g6)/10, 0);
       petal6[i].geometry.vertices[2].set(0,-Math.cos(g6)/3 + 0.2,Math.cos(g6)/8 + 0.5);
@@ -1516,11 +1516,11 @@ function animate() {
   }else{
     bloomSigh3.pause();
   };
-  var relativeFlower7 = new THREE.Vector2(bufflower7.position.x*c + everything.position.x, bufflower7.position.z*c + everything.position.z); 
+  var relativeFlower7 = new THREE.Vector2(bufflower7.position.x*c + everything.position.x, bufflower7.position.z*c + everything.position.z);
   if ( pos.distanceTo(relativeFlower7) < 8*c && (g7 < 2*pi) ){
     g7 += .003;
     bloomSigh7.play();
-    for (var i = 0; i < petal7Number; i++){ 
+    for (var i = 0; i < petal7Number; i++){
       petal7[i].geometry.vertices[0].set(Math.cos(g7)/2 + 0.51, 2*bloom7 - 6*Math.cos(g7)/10, 0);
       petal7[i].geometry.vertices[1].set(-Math.cos(g7)/2 - 0.51, 2*bloom7 - 6*Math.cos(g7)/10, 0);
       petal7[i].geometry.vertices[2].set(0,-Math.cos(g7)/3 + 0.2,Math.cos(g7)/8 + 0.5);
@@ -1603,6 +1603,7 @@ We listen for single click because that works best for mobile for now
 /*
 Listen for keyboard events
 */
+var vrMode = false;
 function onkey(event) {
   event.preventDefault();
 
@@ -1615,6 +1616,9 @@ function onkey(event) {
   } else if (event.keyCode == 80){ //p
     intro.pause();
     intro.currentTime = 0;
+  } else if (event.keyCode == 86) { // v for VR mode
+    vrMode = !vrMode;
+    effect.setVRMode(vrMode);
   }
 };
 window.addEventListener("keydown", onkey, true);

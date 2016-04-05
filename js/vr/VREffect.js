@@ -176,6 +176,14 @@ THREE.VREffect = function ( renderer, done ) {
 		renderer.setSize( width, height );
 	};
 
+	this.setVRMode = function (enable) {
+		if (enable) {
+			vrHMD.requestPresent([{source: canvas, leftBounds: [0.0, 0.0, 0.5, 1.0], rightBounds: [0.5, 0.0, 0.5, 1.0]}]);
+		} else {
+			vrHMD.exitPresent();
+		}
+	}
+
 	this.setFullScreen = function( enable ) {
 		var renderer = this._renderer;
 		var vrHMD = this._vrHMD;
@@ -224,7 +232,6 @@ THREE.VREffect = function ( renderer, done ) {
 		var canvas = renderer.domElement;
 		var fullScreenChange =
 			canvas.mozRequestFullScreen? 'mozfullscreenchange' : 'webkitfullscreenchange';
-		vrHMD.requestPresent([{source: canvas, leftBounds: [0.0, 0.0, 0.5, 1.0], rightBounds: [0.5, 0.0, 0.5, 1.0]}]);
 
 		document.addEventListener( fullScreenChange, onFullScreenChanged, false );
 		function onFullScreenChanged() {
