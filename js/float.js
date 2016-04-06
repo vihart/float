@@ -1117,7 +1117,11 @@ everything.add(bufflower7);
 
 everything.scale.set(c,c,c);
 everything.position.y = -0.1;
-scene.add(everything);
+
+var superEverything = new THREE.Object3D;
+superEverything.add(everything);
+scene.add(superEverything);
+
 
 var i0t = 0; //island timers
 var i1t = 0;
