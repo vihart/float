@@ -301,7 +301,7 @@ THREE.VRControls = function ( camera, speed, done ) {
 					orientation[3]
 				],
 				position : [
-					position[0],
+					position[0] + 1,
 					position[1],
 					position[2]
 				]
