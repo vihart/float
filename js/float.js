@@ -1619,17 +1619,17 @@ function onkey(event) {
   } else if (event.keyCode == 70 || event.keyCode == 13) { //f or enter
     effect.setFullScreen(true) //fullscreen
   } else if (event.keyCode == 73) { //i
-    manualPosition.x += 0.005; //
+    manualPosition.x += 0.01; //
   } else if (event.keyCode == 75) { //k
-    manualPosition.x -= 0.005; //
+    manualPosition.x -= 0.01; //
   } else if (event.keyCode == 74) { //j
-    manualPosition.z += 0.005; //
+    manualPosition.z += 0.01; //
   } else if (event.keyCode == 76) { //l
-    manualPosition.z -= 0.005; //
+    manualPosition.z -= 0.01; //
   } else if (event.keyCode == 85) { //u
-    manualPosition.y += 0.005; //
+    manualPosition.y += 0.01; //
   } else if (event.keyCode == 79) { //o
-    manualPosition.y -= 0.005; //
+    manualPosition.y -= 0.01; //
   } else if (event.keyCode == 32){ //space
     intro.play();
   } else if (event.keyCode == 80){ //p
