@@ -1159,6 +1159,7 @@ var goTog7 = 0;
 var goTog8 = 0;
 
 var win = 0;
+var manualPosition = new THREE.Vector3(0,0,0);
 
 /*
 Request animation frame loop function
@@ -1406,9 +1407,9 @@ function animate() {
     close8.pause();
   };
 
-    everything.position.x = c*( -(move8x + move + move2 + move7x) + 30 -30 -4 +150 );
-    everything.position.z = c*( -(move8z + move7 + move4) + 10 + 20 + 78 );
-
+    everything.position.x = manualPosition.x + c*( -(move8x + move + move2 + move7x) + 30 -30 -4 +150 );
+    everything.position.z = manualPosition.z + c*( -(move8z + move7 + move4) + 10 + 20 + 78 );
+    everything.position.y = manualPosition.y - 0.1;
   //bird flapping
   for (var i = 0; i < birdNumber; i++){
     var flappy = Math.sin(t/(7-(2*birdseed[i])));
@@ -1616,17 +1617,17 @@ function onkey(event) {
   } else if (event.keyCode == 70 || event.keyCode == 13) { //f or enter
     effect.setFullScreen(true) //fullscreen
   } else if (event.keyCode == 73) { //i
-    everything.position.x += 0.005; //
+    manualPosition.x += 0.005; //
   } else if (event.keyCode == 75) { //k
-    everything.position.x -= 0.005; //
+    manualPosition.x -= 0.005; //
   } else if (event.keyCode == 74) { //j
-    everything.position.z += 0.005; //
+    manualPosition.z += 0.005; //
   } else if (event.keyCode == 76) { //l
-    everything.position.z -= 0.005; //
+    manualPosition.z -= 0.005; //
   } else if (event.keyCode == 85) { //u
-    everything.position.y += 0.005; //
+    manualPosition.y += 0.005; //
   } else if (event.keyCode == 79) { //o
-    everything.position.y -= 0.005; //
+    manualPosition.y -= 0.005; //
   } else if (event.keyCode == 32){ //space
     intro.play();
   } else if (event.keyCode == 80){ //p
