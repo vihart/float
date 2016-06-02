@@ -1151,6 +1151,7 @@ var  relativePlant1 = 0;
 var relativeFlock = 0;
 
 var crouchHeight = 15*c;
+var relativeCrouch = crouchHeight;
 
 var goTog1 = 0; // go toggle for moving island 1
 var goTog3 = 0;
@@ -1169,6 +1170,7 @@ function animate() {
   t += 1;
 
   pos.set(camera.position.x, camera.position.z);
+  relativeCrouch = crouchHeight + manualPosition.y;
 
   relative7 = new THREE.Vector2(island7.position.x*c + everything.position.x, island7.position.z*c + everything.position.z);
   if (pos.distanceTo(relative7) < 10*c){
@@ -1270,8 +1272,8 @@ function animate() {
   };
 
   //main island's moving platform
-  if ((pos.distanceTo(relative1) < 5.5*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
-    p1 += (0.002*crouchHeight)/camera.position.y;
+  if ((pos.distanceTo(relative1) < 5.5*c) && (camera.position.y < relativeCrouch) && (camera.position.y > (relativeCrouch - crouchHeight))){
+    p1 += (0.002*crouchHeight)/(camera.position.y - manualPosition.y);
     move = 35 + (35 * Math.sin(p1));
     island1.position.x = move;
     go1.play();
@@ -1295,8 +1297,8 @@ function animate() {
   };
 
   //L island's moving platform
-  if ((pos.distanceTo(relative3) < 10*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
-    p2 += (0.002*crouchHeight)/camera.position.y;
+  if ((pos.distanceTo(relative3) < 10*c) &&  (camera.position.y < relativeCrouch) && (camera.position.y > (relativeCrouch - crouchHeight))){
+    p2 += (0.002*crouchHeight)/(camera.position.y - manualPosition.y);
     move2 = (30 * Math.sin(p2));
     island3.position.x = move2;
     go3.play();
@@ -1320,8 +1322,8 @@ function animate() {
   };
 
   //main island's secret moving platform
-  if ((pos.distanceTo(relative4) < 5.5*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
-    p4 += (0.002*crouchHeight)/camera.position.y;
+  if ((pos.distanceTo(relative4) < 5.5*c) &&  (camera.position.y < relativeCrouch) && (camera.position.y > (relativeCrouch - crouchHeight))){
+    p4 += (0.002*crouchHeight)/(camera.position.y - manualPosition.y);
     move4 = -(40 * Math.cos(p4)) + 40 + 15;
     island4.position.z = move4;
     go4.play();
@@ -1345,8 +1347,8 @@ function animate() {
   };
 
     //main island's far double secret moving platform
-  if ((pos.distanceTo(relative7) < 8*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
-    p7 += (0.002*crouchHeight)/camera.position.y;
+  if ((pos.distanceTo(relative7) < 8*c) &&  (camera.position.y < relativeCrouch) && (camera.position.y > (relativeCrouch - crouchHeight))){
+    p7 += (0.002*crouchHeight)/(camera.position.y - manualPosition.y);
     move7 = -(39 * -Math.cos(p7)) + 39 + 10;
     move7x = 43*Math.cos((move7-20)/53) - 10;
     island7.position.z = move7;
@@ -1376,8 +1378,8 @@ function animate() {
   };
 
   //glowbird island's circle
-  if ((pos.distanceTo(relative8) < 8*c) && (camera.position.y < crouchHeight) && (camera.position.y > 0)){
-    p8 += (0.002*crouchHeight)/camera.position.y;
+  if ((pos.distanceTo(relative8) < 8*c) &&  (camera.position.y < relativeCrouch) && (camera.position.y > (relativeCrouch - crouchHeight))){
+    p8 += (0.002*crouchHeight)/(camera.position.y - manualPosition.y);
     move8z = 70*Math.sin(p8/3);
     move8x = 125*Math.cos(p8/3)+25;
     island8.position.z = move8z;
