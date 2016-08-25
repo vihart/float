@@ -10,7 +10,7 @@ document.body.appendChild( renderer.domElement );
 var scene = new THREE.Scene();
 
 //Create a three.js camera
-var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, .01, 10 );
+var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, 0.01, 10 );
 scene.add(camera);
 
 //Apply VR headset positional data to camera.
@@ -1160,7 +1160,8 @@ var goTog7 = 0;
 var goTog8 = 0;
 
 var win = 0;
-var manualPosition = new THREE.Vector3(0,0,0);
+var manualPosition = new THREE.Vector3(-2.7, -1.35, 2.9);
+everything.position.set(manualPosition.x, manualPosition.y, manualPosition.z);
 
 /*
 Request animation frame loop function
@@ -1638,7 +1639,10 @@ function onkey(event) {
   } else if (event.keyCode == 86) { // v for VR mode
     vrMode = !vrMode;
     effect.setVRMode(vrMode);
-  }
+  }else if (event.keyCode == 88){//x for setting 0,0,0 pos
+            manualPosition.set(camera.position.x,camera.position.y,camera.position.z);
+            everything.position.set(manualPosition.x, manualPosition.y, manualPosition.z);
+    }
 };
 window.addEventListener("keydown", onkey, true);
 
