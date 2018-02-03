@@ -3,6 +3,16 @@ var c = 1/15; //scale factor
 // Setup three.js WebGL renderer
 var renderer = new THREE.WebGLRenderer( { antialias: true } );
 
+WEBVR.getVRDisplay( function ( display ) {
+
+  console.log(display);j
+  renderer.vr.setDevice( display );
+
+});
+
+renderer.vr.enabled = true;
+renderer.setSize( window.innerWidth, window.innerHeight );
+
 // Append the canvas element created by the renderer to document body element.
 document.body.appendChild( renderer.domElement );
 
@@ -10,23 +20,18 @@ document.body.appendChild( renderer.domElement );
 var scene = new THREE.Scene();
 
 //Create a three.js camera
+var cameraRig = new THREE.Object3D();
+cameraRig.position.y = 25*c;
 var camera = new THREE.PerspectiveCamera( 110, window.innerWidth / window.innerHeight, .01, 10 );
-scene.add(camera);
-
-//Apply VR headset positional data to camera.
-var controls = new THREE.VRControls( camera );
-
-//Apply VR stereo rendering to renderer
-var effect = new THREE.VREffect( renderer );
-effect.setSize( window.innerWidth, window.innerHeight );
+cameraRig.add(camera);
+scene.add(cameraRig);
 
 //bg color
 renderer.setClearColor( 0xaaddff );
 
+document.body.appendChild(WEBVR.createButton(renderer));
+
 scene.fog = new THREE.FogExp2( 0xaaddff, .02/c);
-
-camera.position.y = 25*c;
-
 
 var piano1 = document.querySelector('#piano1');
 var piano2 = document.querySelector('#piano2');
@@ -45,8 +50,8 @@ var close8 = document.querySelector('#close8');
 var go1 = document.querySelector('#go1');
 var go3 = document.querySelector('#go3');
 var go4 = document.querySelector('#go4');
-var go7 = document.querySelector('#go7')
-var go8 = document.querySelector('#go8');;
+var go7 = document.querySelector('#go7');
+var go8 = document.querySelector('#go8');
 var bloomHigh = document.querySelector('#bloomHigh');
 var bloomMed = document.querySelector('#bloomMed');
 var bloomLow = document.querySelector('#bloomLow');
@@ -1138,17 +1143,21 @@ var b6 = 0;
 var b0 = 0;
 var b7 = 0;
 
-var relative0 = 0;
-var relative1 = 0;
-var relative2 = 0;
-var relative3 = 0;
-var relative4 = 0;
-var relative5 = 0;
-var relative6 = 0;
-var relative7 = 0;
-var relative8 = 0;
-var  relativePlant1 = 0;
-var relativeFlock = 0;
+var relative0 = new THREE.Vector2();
+var relative1 = new THREE.Vector2();
+var relative2 = new THREE.Vector2();
+var relative3 = new THREE.Vector2();
+var relative4 = new THREE.Vector2();
+var relative5 = new THREE.Vector2();
+var relative6 = new THREE.Vector2();
+var relative7 = new THREE.Vector2();
+var relative8 = new THREE.Vector2();
+var relativePlant1 = new THREE.Vector2();
+var relativeFlock = new THREE.Vector2();
+var relativeFlower = new THREE.Vector2();
+var relativeFlower5 = new THREE.Vector2();
+var relativeFlower6 = new THREE.Vector2();
+var relativeFlower7 = new THREE.Vector2();
 
 var crouchHeight = 15*c;
 var relativeCrouch = crouchHeight;
@@ -1162,6 +1171,8 @@ var goTog8 = 0;
 var win = 0;
 var manualPosition = new THREE.Vector3(0,0,0);
 
+var worldPos = new THREE.Vector3();
+
 /*
 Request animation frame loop function
 */
@@ -1169,10 +1180,11 @@ function animate() {
 
   t += 1;
 
-  pos.set(camera.position.x, camera.position.z);
-  relativeCrouch = crouchHeight + manualPosition.y;
+  camera.getWorldPosition(worldPos);
+  pos.set(worldPos.x, worldPos.z);
+  relativeCrouch = -0.5;
 
-  relative7 = new THREE.Vector2(island7.position.x*c + everything.position.x, island7.position.z*c + everything.position.z);
+  relative7.set(island7.position.x*c + everything.position.x, island7.position.z*c + everything.position.z);
   if (pos.distanceTo(relative7) < 10*c){
     i7t = Math.min(i7t + 0.002, 1);
     if (i7t > .2){
@@ -1183,7 +1195,7 @@ function animate() {
     };
   };
 
-  relative8 = new THREE.Vector2(island8.position.x*c + everything.position.x, island8.position.z*c + everything.position.z);
+  relative8.set(island8.position.x*c + everything.position.x, island8.position.z*c + everything.position.z);
   if (pos.distanceTo(relative8) < 10*c){
     i8t = Math.min(i8t + 0.002, 1);
     birdglow.intensity = Math.min(5*i8t, 1.6);
@@ -1195,7 +1207,7 @@ function animate() {
     };
   };
 
-  relative4 = new THREE.Vector2(island4.position.x*c + everything.position.x, island4.position.z*c + everything.position.z);
+  relative4.set(island4.position.x*c + everything.position.x, island4.position.z*c + everything.position.z);
   if (pos.distanceTo(relative4) < 10*c){
     i4t = Math.min(i4t + 0.002, 1);
     if (i4t > .2){
@@ -1206,7 +1218,7 @@ function animate() {
     };
   };
 
-  relative5 = new THREE.Vector2(island5.position.x*c + everything.position.x, island5.position.z*c + everything.position.z);
+  relative5.set(island5.position.x*c + everything.position.x, island5.position.z*c + everything.position.z);
   if (pos.distanceTo(relative5) < 10*c){
     i5t = Math.min(i5t + 0.002, 1);
     if (i5t > .2){
@@ -1217,7 +1229,7 @@ function animate() {
     };
   };
 
-  relative6 = new THREE.Vector2(island6.position.x*c + everything.position.x, island6.position.z*c + everything.position.z);
+  relative6.set(island6.position.x*c + everything.position.x, island6.position.z*c + everything.position.z);
   if (pos.distanceTo(relative6) < 10*c){
     i6t = Math.min(i6t + 0.002, 1);
     if (i6t > .2){
@@ -1228,7 +1240,7 @@ function animate() {
     };
   };
 
-  relative0 = new THREE.Vector2(island0.position.x*c + everything.position.x, island0.position.z*c + everything.position.z);
+  relative0.set(island0.position.x*c + everything.position.x, island0.position.z*c + everything.position.z);
   if (pos.distanceTo(relative0) < 15*c){
     i0t = Math.min(i0t + 0.002, 1);
     if (i0t > .2){
@@ -1239,7 +1251,7 @@ function animate() {
     };
   };
 
-  relative1 = new THREE.Vector2(everything.position.x + island1.position.x*c, everything.position.z + island1.position.z*c);
+  relative1.set(everything.position.x + island1.position.x*c, everything.position.z + island1.position.z*c);
   if (pos.distanceTo(relative1) < 10*c){
     i1t = Math.min(i1t + 0.002, 1);
     if (i1t > .2){
@@ -1249,7 +1261,7 @@ function animate() {
       };
     };
   };
-  relative2 = new THREE.Vector2(65*c + everything.position.x, - 15*c + everything.position.z);
+  relative2.set(65*c + everything.position.x, - 15*c + everything.position.z);
   if (pos.distanceTo(relative2) < 10*c){
     i2t = Math.min(i2t + 0.002, 1);
     if (i2t > .2){
@@ -1260,7 +1272,7 @@ function animate() {
     };
   };
 
-  relative3 = new THREE.Vector2(90*c + everything.position.x + island3.position.x*c, 2*c + everything.position.z + island3.position.z*c);
+  relative3.set(90*c + everything.position.x + island3.position.x*c, 2*c + everything.position.z + island3.position.z*c);
   if (pos.distanceTo(relative3) < 10*c){
     i3t = Math.min(i3t + 0.002, 1);
     if (i3t > .2){
@@ -1449,7 +1461,7 @@ function animate() {
   };
 
     //plant1
-  relativePlant1 = new THREE.Vector2(plant1.position.x*c + everything.position.x, plant1.position.z*c + everything.position.z);
+  relativePlant1.set(plant1.position.x*c + everything.position.x, plant1.position.z*c + everything.position.z);
   if (relativePlant1.distanceTo(pos) < 20*c){
     g1 += .02;
     plant1.scale.x = Math.min(15, 3+g1);
@@ -1472,7 +1484,7 @@ function animate() {
   };
 
   //main island blooming flower
-  var relativeFlower = new THREE.Vector2(bufflower.position.x*c + everything.position.x, bufflower.position.z*c + everything.position.z);
+  relativeFlower.set(bufflower.position.x*c + everything.position.x, bufflower.position.z*c + everything.position.z);
   if ( pos.distanceTo(relativeFlower) < 8*c && (g3 < 2*pi) ){
     g3 += .003;
     bloomSigh.play();
@@ -1490,7 +1502,7 @@ function animate() {
   };
 
     //lower sub island blooming flower
-  var relativeFlower5 = new THREE.Vector2(bufflower5.position.x*c + everything.position.x, bufflower5.position.z*c + everything.position.z);
+  relativeFlower5.set(bufflower5.position.x*c + everything.position.x, bufflower5.position.z*c + everything.position.z);
   if ( pos.distanceTo(relativeFlower5) < 8*c && (g5 < 2*pi) ){
     g5 += .003;
     bloomSigh2.play();
@@ -1507,7 +1519,7 @@ function animate() {
     bloomSigh2.pause();
   };
   //upper sub island blooming flower
-  var relativeFlower6 = new THREE.Vector2(bufflower6.position.x*c + everything.position.x, bufflower6.position.z*c + everything.position.z);
+  relativeFlower6.set(bufflower6.position.x*c + everything.position.x, bufflower6.position.z*c + everything.position.z);
   if ( pos.distanceTo(relativeFlower6) < 8*c && (g6 < 2*pi) ){
     g6 += .003;
     bloomSigh3.play();
@@ -1523,7 +1535,7 @@ function animate() {
   }else{
     bloomSigh3.pause();
   };
-  var relativeFlower7 = new THREE.Vector2(bufflower7.position.x*c + everything.position.x, bufflower7.position.z*c + everything.position.z);
+  relativeFlower7.set(bufflower7.position.x*c + everything.position.x, bufflower7.position.z*c + everything.position.z);
   if ( pos.distanceTo(relativeFlower7) < 8*c && (g7 < 2*pi) ){
     g7 += .003;
     bloomSigh7.play();
@@ -1569,10 +1581,10 @@ function animate() {
   //island music
   if (win == 0){
     pianoEnd.pause();
-    piano1.volume = Math.min(0.8, 3/(pos.distanceTo(relative0)*pos.distanceTo(relative0)*pos.distanceTo(relative0)));
-    piano2.volume = Math.min(0.8, 2/(pos.distanceTo(relative2)*pos.distanceTo(relative2)*pos.distanceTo(relative2)));
-    piano3.volume = Math.min(0.8, 2/((pos.distanceTo(relative8)*pos.distanceTo(relative8)*pos.distanceTo(relative8))));
-    piano4.volume = Math.min(0.8, 2/(pos.distanceTo(relative7)*pos.distanceTo(relative7)*pos.distanceTo(relative7)));
+    piano1.volume = Math.min(0.2, 3/(pos.distanceTo(relative0)*pos.distanceTo(relative0)*pos.distanceTo(relative0)));
+    piano2.volume = Math.min(0.2, 2/(pos.distanceTo(relative2)*pos.distanceTo(relative2)*pos.distanceTo(relative2)));
+    piano3.volume = Math.min(0.2, 2/((pos.distanceTo(relative8)*pos.distanceTo(relative8)*pos.distanceTo(relative8))));
+    piano4.volume = Math.min(0.2, 2/(pos.distanceTo(relative7)*pos.distanceTo(relative7)*pos.distanceTo(relative7)));
   } else {
     piano1.pause();
     piano2.pause();
@@ -1583,14 +1595,11 @@ function animate() {
   };
 
 
-  relativeFlock = new THREE.Vector2(c*flock.position.x + everything.position.x + 30*c, c*flock.position.z + everything.position.z);
+  relativeFlock.set(c*flock.position.x + everything.position.x + 30*c, c*flock.position.z + everything.position.z);
   birdNoise.volume = Math.min(0.5, 2/(20*(pos.distanceTo(relativeFlock))));
 
-  //Update VR headset position and apply to camera.
-  controls.update();
-
   // Render the scene through the VREffect.
-  effect.render( scene, camera );
+  renderer.render( scene, camera );
   requestAnimationFrame( animate );
 }
 
@@ -1615,9 +1624,7 @@ function onkey(event) {
   event.preventDefault();
 
   if (event.keyCode == 90) { // z
-    controls.resetSensor(); //zero rotation
   } else if (event.keyCode == 70 || event.keyCode == 13) { //f or enter
-    effect.setFullScreen(true) //fullscreen
   } else if (event.keyCode == 73) { //i
     manualPosition.x += 0.01; //
   } else if (event.keyCode == 75) { //k
@@ -1637,7 +1644,6 @@ function onkey(event) {
     intro.currentTime = 0;
   } else if (event.keyCode == 86) { // v for VR mode
     vrMode = !vrMode;
-    effect.setVRMode(vrMode);
   }
 };
 window.addEventListener("keydown", onkey, true);
@@ -1648,6 +1654,5 @@ Handle window resizes
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  effect.setSize( window.innerWidth, window.innerHeight );
 }
 window.addEventListener( 'resize', onWindowResize, false );
